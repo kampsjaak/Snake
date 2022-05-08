@@ -3,15 +3,19 @@
 #include <thread> // delays
 #include <windows.h > // input https://visualstudioclient.gallerycdn.vsassets.io/extensions/visualstudioclient/microsoftvisualstudio2017installerprojects/1.0.0/1620063166533/InstallerProjects.vsix
 #include <ctime> // random nummer generation
+
 #include "Game.h"
+#include "Player.h"
 
 const unsigned int programUpdateStep = 75; //ms
 unsigned long int tick = 0;
 Game theGame;
+Player thePlayer;
 
 int main()
 {
 	//system("cls");
+	thePlayer.Initialise();
 
 	while (!GetAsyncKeyState(VK_ESCAPE))
 	{
