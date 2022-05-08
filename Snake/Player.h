@@ -13,6 +13,7 @@ class Player {
 public:
 	Player();
 	void Initialise();
+	void Move();
 	Heading m_heading = Heading::Left;
 	COORD m_head = {-1,-1};
 	std::vector<COORD> snake[3];

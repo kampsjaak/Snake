@@ -20,14 +20,15 @@
 #define WHITE			15
 
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-COORD cursorPos = { 0, 0 };
 CONSOLE_CURSOR_INFO cursorInfo;
+COORD cursorPos = { 0, 0 };
+COORD applePos = { 5, 5 };
 
 const unsigned short screenColums = 119;
 const unsigned short screenRows = 29;
 
 Game::Game() {
-	std::cout << "new class! :-)";
+	std::cout << "new game! :-)";
 };
 
 void Game::Update() { 
