@@ -1,6 +1,8 @@
-#include "Player.h"
 #include <vector>
 #include <iostream>
+
+#include "Player.h"
+#include "Draw.h"
 
 void Player::Initialise() {
 	Player::alive = true;
@@ -30,8 +32,9 @@ void Player::Move() {
 }
 
 void Player::Draw() {
-	for (auto& segment : Player::snake) {
-
+	const char snek = '@';
+	for (auto& coordinate : Player::snake) {
+		Draw::DrawCharacter(snek*, coordinate)
 	}
 }
 
