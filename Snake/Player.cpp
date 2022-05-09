@@ -4,7 +4,6 @@
 
 void Player::Initialise() {
 	Player::alive = true;
-	Player::m_head = { 1,1 };
 	Player::m_heading = Heading::Right;
 	std::cout << "init player!";
 }
@@ -28,7 +27,6 @@ void Player::Move() {
 		m_head.Y = snake->back().Y - 1;
 		break;
 	}
-
 }
 
 Player::Player() { return; };

@@ -31,6 +31,10 @@ Game::Game() {
 	std::cout << "new game! :-)";
 };
 
+void Game::SpawnApple() {
+	return;
+}
+
 void Game::Update() { 
 	std::cout << "@";
 	return;

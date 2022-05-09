@@ -1,29 +1,33 @@
 #include <iostream>
 #include <chrono> // delays
 #include <thread> // delays
-#include <windows.h > // input https://visualstudioclient.gallerycdn.vsassets.io/extensions/visualstudioclient/microsoftvisualstudio2017installerprojects/1.0.0/1620063166533/InstallerProjects.vsix
+#include <windows.h> // input https://visualstudioclient.gallerycdn.vsassets.io/extensions/visualstudioclient/microsoftvisualstudio2017installerprojects/1.0.0/1620063166533/InstallerProjects.vsix
 #include <ctime> // random nummer generation
 
 #include "Game.h"
 #include "Player.h"
 
-const unsigned int programUpdateStep = 125; //ms
+const unsigned int programUpdateStep = 175; //ms
 unsigned long int tick = 0;
 Game theGame;
 Player thePlayer;
 
 void HandleInputs() {
 	if (GetAsyncKeyState(0x41)) {
-		// a left
+		thePlayer.m_heading = Heading::Left;
+		std::cout << "a";
 		return;
 	} else if(GetAsyncKeyState(0x44)) {
-		// d right
+		thePlayer.m_heading = Heading::Right;
+		std::cout << "d";
 		return;
-	} else if(GetAsyncKeyState(0x58)) {
-		// w up
+	} else if(GetAsyncKeyState(0x57)) {
+		thePlayer.m_heading = Heading::Top;
+		std::cout << "w";
 		return;
 	} else if(GetAsyncKeyState(0x53)) {
-		// s down
+		thePlayer.m_heading = Heading::Down;
+		std::cout << "s";
 		return;
 	}
 }
