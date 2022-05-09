@@ -29,4 +29,10 @@ void Player::Move() {
 	}
 }
 
+void Player::Draw() {
+	for (auto& segment : Player::snake) {
+
+	}
+}
+
 Player::Player() { return; };
