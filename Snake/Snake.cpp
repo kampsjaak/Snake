@@ -9,25 +9,22 @@
 
 const unsigned int programUpdateStep = 175; //ms
 unsigned long int tick = 0;
-Game theGame;
 Player thePlayer;
+Game theGame(thePlayer);
+Draw d(32, 20);
 
 void HandleInputs() {
 	if (GetAsyncKeyState(0x41)) {
 		thePlayer.m_heading = Heading::Left;
-		std::cout << "a";
 		return;
 	} else if(GetAsyncKeyState(0x44)) {
 		thePlayer.m_heading = Heading::Right;
-		std::cout << "d";
 		return;
 	} else if(GetAsyncKeyState(0x57)) {
 		thePlayer.m_heading = Heading::Top;
-		std::cout << "w";
 		return;
 	} else if(GetAsyncKeyState(0x53)) {
 		thePlayer.m_heading = Heading::Down;
-		std::cout << "s";
 		return;
 	}
 }
@@ -35,7 +32,7 @@ void HandleInputs() {
 int main()
 {
 	//system("cls");
-	thePlayer.Initialise();
+	thePlayer.Initialise(d);
 
 	while (!GetAsyncKeyState(VK_ESCAPE))
 	{

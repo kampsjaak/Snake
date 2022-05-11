@@ -21,12 +21,10 @@
 class Draw {
 public:
 	Draw(unsigned short width, unsigned short height);
-	void DrawCharacter(const char* character, COORD position);
+	void DrawCharacter(char character, COORD position);
 private:
-	unsigned short m_screenColums = 0;
-	unsigned short m_screenRows = 0;
+	unsigned short m_screenColums = 20;
+	unsigned short m_screenRows = 20;
 	HANDLE m_hConsole;
 	COORD cursorPos = { 0, 0 };
-	CONSOLE_CURSOR_INFO cursorInfo;
-
 };
