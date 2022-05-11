@@ -9,9 +9,9 @@
 
 const unsigned int programUpdateStep = 175; //ms
 unsigned long int tick = 0;
-Player thePlayer;
-Game theGame(thePlayer);
 Draw d(32, 20);
+Player thePlayer;
+Game theGame(thePlayer, d);
 
 void HandleInputs() {
 	if (GetAsyncKeyState(0x41)) {
@@ -31,8 +31,8 @@ void HandleInputs() {
 
 int main()
 {
-	//system("cls");
-	thePlayer.Initialise(d);
+	system("cls");
+	thePlayer.Initialise();
 
 	while (!GetAsyncKeyState(VK_ESCAPE))
 	{
