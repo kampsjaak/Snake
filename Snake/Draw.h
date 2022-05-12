@@ -20,10 +20,10 @@
 
 class Draw {
 public:
-	Draw() {};
 	Draw(unsigned short width, unsigned short height);
 	void DrawCharacter(char character, COORD position);
 private:
+	unsigned char m_printChar = ' ';
 	unsigned short m_screenColums = 20;
 	unsigned short m_screenRows = 20;
 	HANDLE m_hConsole {};

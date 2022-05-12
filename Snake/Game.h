@@ -7,12 +7,13 @@
 class Game {
 public:
 	Game() {};
-	Game(Player thePlayer, Draw draw);
-	Player m_player;
-	Draw m_draw;
+	Game(Player* thePlayer);
 
 	void Update();
 	void SpawnApple();
+
+	Player* m_player{};
+	
 	COORD m_apple = { 0, 1 };
 private:
 };

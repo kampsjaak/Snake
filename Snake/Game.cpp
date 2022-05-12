@@ -11,13 +11,16 @@ void Game::SpawnApple() {
 	return;
 }
 
-Game::Game(Player player, Draw draw) {
+Game::Game(Player* player) {
+	// member variable assignment
 	m_player = player;
-	m_draw = draw;
+
+	// initialise gameplay systems
+	m_player->Initialise();
 	return;
 };
 
 void Game::Update() {
-	m_player.Move();
+	m_player->Move();
 	return;
 }

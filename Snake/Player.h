@@ -1,6 +1,7 @@
 #pragma once
 #include <windows.h>
 #include <vector>
+#include <string>
 
 #include "Draw.h"
 
@@ -13,15 +14,18 @@ enum class Heading {
 
 class Player {
 public:
-	Player() {};
+	Player(Draw* d);
+
 	void Initialise();
 	void Move();
-	void DrawMe(Draw* d);
+	void DrawMe();
 	void Redraw();
+	
+	bool alive = false;
+	std::vector<COORD> snake{{ 0,5 }, { 1,5 }, { 2,5 }};
 	Heading m_heading = Heading::Left;
 	COORD m_head = { -1,-1 };
-	std::vector<COORD> snake{{ 0,5 }, { 1,5 }, { 2,5 }};
-	bool alive = false;
+
 private:
-	Draw* m_draw{};
+	Draw* m_draw;
 };

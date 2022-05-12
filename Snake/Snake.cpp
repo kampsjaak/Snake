@@ -9,9 +9,14 @@
 
 const unsigned int programUpdateStep = 175; //ms
 unsigned long int tick = 0;
+// drawing logic
 Draw d(32, 20);
-Player thePlayer;
-Game theGame(thePlayer, d);
+
+// classes that draw themselves
+Player thePlayer(&d);
+
+// manager of classes that draw themselves
+Game theGame(&thePlayer);
 
 void HandleInputs() {
 	if (GetAsyncKeyState(0x41)) {
@@ -31,8 +36,7 @@ void HandleInputs() {
 
 int main()
 {
-	system("cls");
-	thePlayer.Initialise();
+	// initialisation of classes is game logic by definition?
 
 	while (!GetAsyncKeyState(VK_ESCAPE))
 	{

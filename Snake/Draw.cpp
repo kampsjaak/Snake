@@ -8,8 +8,9 @@ Draw::Draw(unsigned short width, unsigned short height) {
 };
 
 void Draw::DrawCharacter(const char character, COORD position) { 
-	if (position.X < 0 || position.X > m_screenColums) return;
-	if (position.Y < 0 || position.Y > m_screenRows) return;
-	SetConsoleCursorPosition(m_hConsole, position);
-	WriteConsole(m_hConsole, &character, 1, NULL, NULL);
+	m_printChar = character;
+	if (position.X < 0 || position.X > Draw::m_screenColums) return;
+	if (position.Y < 0 || position.Y > Draw::m_screenRows) return;
+	SetConsoleCursorPosition(Draw::m_hConsole, position);
+	WriteConsole(Draw::m_hConsole, &m_printChar, 1, NULL, NULL);
 };
