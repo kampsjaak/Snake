@@ -11,6 +11,16 @@ void Player::DrawMe() {
 	}
 }
 
+void Player::Redraw() {
+	// undraw the tail bit
+	// shift array over 1 overwriting the tail
+	// add head position
+
+	// add state for growing the snek
+
+	return;
+};
+
 void Player::Initialise() {
 	Player::m_heading = Heading::Right;
 	Player::DrawMe();
@@ -40,16 +50,6 @@ void Player::Move() {
 	m_draw->DrawCharacter('!', snake.back());
 	m_draw->DrawCharacter('@', snake.front());
 }
-
-void Player::Redraw() { 
-	// undraw the tail bit
-	// shift array over 1 overwriting the tail
-	// add head position
-
-	// add state for growing the snek
-
-	return; 
-};
 
 Player::Player(Draw* d) {
 	m_draw = d;
