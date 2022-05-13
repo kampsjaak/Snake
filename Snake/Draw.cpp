@@ -1,10 +1,12 @@
-#include "Draw.h"
 #include <windows.h>
+#include <stdint.h>
 
-Draw::Draw(int window[2]) {
+#include "Draw.h"
+
+Draw::Draw(uint32_t width, uint32_t height) {
 	m_hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-	m_screenColums = window[0];
-	m_screenRows = window[1];
+	m_screenColums = width;
+	m_screenRows = height;
 };
 
 void Draw::DrawCharacter(const char character, COORD position) { 

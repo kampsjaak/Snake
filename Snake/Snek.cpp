@@ -7,12 +7,14 @@
 #include "SnekManager.h"
 #include "Game.h"
 #include "Player.h"
+#include "util.h"
 
 const unsigned int programUpdateStep = 175; //ms
 unsigned long int tick = 0;
+
 // drawing logic
-int a[2]{ 0, 0 };
-Draw d(a);
+consoleSize cs = GetConsoleSize();
+Draw d(cs.w, cs.h);
 SnekManager snekManager(&d);
 
 // classes that draw themselves

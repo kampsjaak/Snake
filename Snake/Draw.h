@@ -1,5 +1,6 @@
 #pragma once
 #include <windows.h>
+#include <stdint.h>
 
 #define BLACK			0
 #define BLUE			1
@@ -20,7 +21,7 @@
 
 class Draw {
 public:
-	Draw(int window[2]);
+	Draw(uint32_t width, uint32_t height);
 	void DrawCharacter(char character, COORD position);
 private:
 	unsigned char m_printChar = ' ';

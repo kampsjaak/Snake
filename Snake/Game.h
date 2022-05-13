@@ -13,7 +13,7 @@ public:
 	void Update();
 	void SpawnApple();
 
-	SnekManager* m_snekManager;
+	SnekManager* m_snekManager{};
 	Player* m_player{};
 	
 	COORD m_apple = { 0, 1 };
