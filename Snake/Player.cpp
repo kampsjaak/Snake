@@ -4,10 +4,11 @@
 #include "Game.h"
 #include "Player.h"
 #include "Draw.h"
+#include "SnekManager.h"
 
-void Player::DrawMe() {
+void Player::DrawSelf() {
 	for (auto& coord : Player::snake) {
-		m_draw->DrawCharacter('!', coord);
+		m_snekManager->GetDraw()->DrawCharacter('!', coord);
 	}
 }
 
@@ -23,12 +24,12 @@ void Player::Redraw() {
 
 void Player::Initialise() {
 	Player::m_heading = Heading::Right;
-	Player::DrawMe();
+	Player::DrawSelf();
 }
 
 void Player::Move() {
 	// cursor to head, draw blank
-	m_draw->DrawCharacter('@', snake.back());
+	m_snekManager->GetDraw()->DrawCharacter(' ', snake.back());
 	switch (m_heading) {
 	case Heading::Left:
 		m_head.X = snake.back().X - 1;
@@ -47,10 +48,10 @@ void Player::Move() {
 		m_head.Y = snake.back().Y - 1;
 		break;
 	}
-	m_draw->DrawCharacter('!', snake.back());
-	m_draw->DrawCharacter('@', snake.front());
+	m_snekManager->GetDraw()->DrawCharacter('!', snake.back());
+	m_snekManager->GetDraw()->DrawCharacter(' ', snake.front());
 }
 
-Player::Player(Draw* d) {
-	m_draw = d;
+Player::Player(SnekManager* sm) {
+	m_snekManager = sm;
 };

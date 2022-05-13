@@ -11,12 +11,14 @@ void Game::SpawnApple() {
 	return;
 }
 
-Game::Game(Player* player) {
+Game::Game(SnekManager* sm, Player* player) {
 	// member variable assignment
+	m_snekManager = sm;
 	m_player = player;
 
 	// initialise gameplay systems
 	m_player->Initialise();
+	SpawnApple();
 	return;
 };
 

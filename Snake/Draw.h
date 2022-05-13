@@ -20,7 +20,7 @@
 
 class Draw {
 public:
-	Draw(unsigned short width, unsigned short height);
+	Draw(int window[2]);
 	void DrawCharacter(char character, COORD position);
 private:
 	unsigned char m_printChar = ' ';

@@ -4,19 +4,22 @@
 #include <windows.h> // input https://visualstudioclient.gallerycdn.vsassets.io/extensions/visualstudioclient/microsoftvisualstudio2017installerprojects/1.0.0/1620063166533/InstallerProjects.vsix
 #include <ctime> // random nummer generation
 
+#include "SnekManager.h"
 #include "Game.h"
 #include "Player.h"
 
 const unsigned int programUpdateStep = 175; //ms
 unsigned long int tick = 0;
 // drawing logic
-Draw d(32, 20);
+int a[2]{ 0, 0 };
+Draw d(a);
+SnekManager snekManager(&d);
 
 // classes that draw themselves
-Player thePlayer(&d);
+Player thePlayer(&snekManager);
 
 // manager of classes that draw themselves
-Game theGame(&thePlayer);
+Game theGame(&snekManager, &thePlayer);
 
 void HandleInputs() {
 	if (GetAsyncKeyState(0x41)) {

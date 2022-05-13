@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 
+#include "SnekManager.h"
 #include "Draw.h"
 
 enum class Heading {
@@ -14,18 +15,19 @@ enum class Heading {
 
 class Player {
 public:
-	Player(Draw* d);
+	Player(SnekManager* d);
 
 	void Initialise();
 	void Move();
-	void DrawMe();
+	void DrawSelf();
 	void Redraw();
 	
 	bool alive = false;
+
 	std::vector<COORD> snake{{ 0,5 }, { 1,5 }, { 2,5 }};
 	Heading m_heading = Heading::Left;
 	COORD m_head = { -1,-1 };
 
 private:
-	Draw* m_draw;
+	SnekManager* m_snekManager;
 };
