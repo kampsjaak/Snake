@@ -15,19 +15,17 @@ enum class Heading {
 
 class Player {
 public:
-	Player(SnekManager* d);
+	Player(SnekManager*);
 
 	void Initialise();
 	void Move();
 	void DrawSelf();
-	void Redraw();
+	void Redraw(bool);
+	bool IsAtPosition(COORD);
 	
-	bool alive = false;
-
 	std::vector<COORD> snake{{ 0,5 }, { 1,5 }, { 2,5 }};
 	Heading m_heading = Heading::Left;
 	COORD m_head = { -1,-1 };
-
 private:
 	SnekManager* m_snekManager{};
 };

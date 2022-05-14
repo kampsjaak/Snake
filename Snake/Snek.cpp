@@ -15,7 +15,7 @@ unsigned long int tick = 0;
 // drawing logic
 consoleSize cs = GetConsoleSize();
 Draw d(cs.w, cs.h);
-SnekManager snekManager(&d);
+SnekManager snekManager(&d, cs.w, cs.h);
 
 // classes that draw themselves
 Player thePlayer(&snekManager);
@@ -25,15 +25,19 @@ Game theGame(&snekManager, &thePlayer);
 
 void HandleInputs() {
 	if (GetAsyncKeyState(0x41)) {
+		if (thePlayer.m_heading == Heading::Right) return;
 		thePlayer.m_heading = Heading::Left;
 		return;
 	} else if(GetAsyncKeyState(0x44)) {
+		if (thePlayer.m_heading == Heading::Left) return;
 		thePlayer.m_heading = Heading::Right;
 		return;
 	} else if(GetAsyncKeyState(0x57)) {
+		if (thePlayer.m_heading == Heading::Down) return;
 		thePlayer.m_heading = Heading::Top;
 		return;
 	} else if(GetAsyncKeyState(0x53)) {
+		if (thePlayer.m_heading == Heading::Top) return;
 		thePlayer.m_heading = Heading::Down;
 		return;
 	}

@@ -4,10 +4,15 @@
 #include "Player.h"
 #include "Draw.h"
 #include "Game.h"
-
-COORD applePos = { 5, 5 };
+#include <ctime>
 
 void Game::SpawnApple() {
+	int rng = rand();
+	COORD pos = { rng % m_snekManager->width, 0 % m_snekManager->height };
+	//while(Game::m_player->IsAtPosition(pos)) {
+	//	// evaluate, reroll
+	//}
+	m_snekManager->GetDraw()->DrawCharacter('o', pos);
 	return;
 }
 
@@ -18,7 +23,10 @@ Game::Game(SnekManager* sm, Player* player) {
 
 	// initialise gameplay systems
 	m_player->Initialise();
+	
 	SpawnApple();
+
+	srand(time(0));
 	return;
 };
 

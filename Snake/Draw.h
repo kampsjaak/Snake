@@ -21,12 +21,17 @@
 
 class Draw {
 public:
-	Draw(uint32_t width, uint32_t height);
-	void DrawCharacter(char character, COORD position);
+	Draw(uint32_t, uint32_t);
+	void DrawCharacter(char, COORD);
+	unsigned char m_charSnek = '@';
+	unsigned char m_charClear = ' ';
+	unsigned char m_charApple = 'o';
 private:
 	unsigned char m_printChar = ' ';
 	unsigned short m_screenColums = 20;
 	unsigned short m_screenRows = 20;
 	HANDLE m_hConsole {};
 	COORD cursorPos = { 0, 0 };
+	COORD m_returnPosition = {0, 0};
+
 };

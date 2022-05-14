@@ -7,29 +7,44 @@
 #include "SnekManager.h"
 
 void Player::DrawSelf() {
+	unsigned char snekChar = m_snekManager->GetDraw()->m_charSnek;
 	for (auto& coord : Player::snake) {
-		m_snekManager->GetDraw()->DrawCharacter('!', coord);
+		m_snekManager->GetDraw()->DrawCharacter('@', coord);
 	}
 }
 
-void Player::Redraw() {
-	// undraw the tail bit
-	// shift array over 1 overwriting the tail
+bool Player::IsAtPosition(COORD point) {
+	for (auto& coord : Player::snake) {
+		if (coord.X == point.X && coord.Y == point.Y) return true;
+	}
+	return false;
+}
+
+void Player::Redraw(bool grow) {
+	// undraw the tail
+	m_snekManager->GetDraw()->DrawCharacter(' ', snake.front());
+
+	// snek eat apple
+	if(!grow) {
+		// shift array over 1 overwriting the tail
+		for (size_t i = 0; i < snake.size() - 1; i++) {
+			snake[i].X = snake[i + 1].X;
+			snake[i].Y = snake[i + 1].Y;
+		}
+	}
+
 	// add head position
-
-	// add state for growing the snek
-
+	snake.back() = m_head;
+	m_snekManager->GetDraw()->DrawCharacter('@', snake.back());
 	return;
 };
 
 void Player::Initialise() {
-	Player::m_heading = Heading::Right;
-	Player::DrawSelf();
+	m_heading = Heading::Right;
+	DrawSelf();
 }
 
 void Player::Move() {
-	// cursor to head, draw blank
-	m_snekManager->GetDraw()->DrawCharacter(' ', snake.back());
 	switch (m_heading) {
 	case Heading::Left:
 		m_head.X = snake.back().X - 1;
@@ -41,15 +56,20 @@ void Player::Move() {
 		break;
 	case Heading::Top:
 		m_head.X = snake.back().X;
-		m_head.Y = snake.back().Y + 1;
+		m_head.Y = snake.back().Y - 1;
 		break;
 	case Heading::Down:
 		m_head.X = snake.back().X;
-		m_head.Y = snake.back().Y - 1;
+		m_head.Y = snake.back().Y + 1;
 		break;
 	}
-	m_snekManager->GetDraw()->DrawCharacter('!', snake.back());
-	m_snekManager->GetDraw()->DrawCharacter(' ', snake.front());
+	/*if(m_head.X == m_game->m_apple.X && m_head.Y == m_game->m_apple.Y) {
+		Redraw(true);
+	}
+	else {
+		Redraw(false);
+	}*/
+	Redraw(false);
 }
 
 Player::Player(SnekManager* sm) {

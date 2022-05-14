@@ -15,4 +15,5 @@ void Draw::DrawCharacter(const char character, COORD position) {
 	if (position.Y < 0 || position.Y > m_screenRows) return;
 	SetConsoleCursorPosition(m_hConsole, position);
 	WriteConsole(m_hConsole, &m_printChar, 1, NULL, NULL);
+	SetConsoleCursorPosition(m_hConsole, m_returnPosition);
 };
