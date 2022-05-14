@@ -24,8 +24,6 @@ public:
 	Draw(uint32_t, uint32_t);
 	void DrawCharacter(char, COORD);
 	unsigned char m_charSnek = '@';
-	unsigned char m_charClear = ' ';
-	unsigned char m_charApple = 'o';
 private:
 	unsigned char m_printChar = ' ';
 	unsigned short m_screenColums = 20;
