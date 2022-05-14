@@ -15,7 +15,7 @@ unsigned long int tick = 0;
 // drawing logic
 consoleSize cs = GetConsoleSize();
 Draw d(cs.w, cs.h);
-SnekManager snekManager(&d, cs.w, cs.h);
+SnekManager snekManager(&d, 40, 10);
 
 // classes that draw themselves
 Player thePlayer(&snekManager);
@@ -45,7 +45,6 @@ void HandleInputs() {
 
 int main()
 {
-	// initialisation of classes is game logic by definition?
 
 	while (!GetAsyncKeyState(VK_ESCAPE))
 	{

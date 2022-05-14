@@ -31,10 +31,12 @@ void Player::Redraw(bool grow) {
 			snake[i].X = snake[i + 1].X;
 			snake[i].Y = snake[i + 1].Y;
 		}
+		// add head position
+		snake.back() = m_head;
+	} else {
+		snake.push_back(m_head);
 	}
 
-	// add head position
-	snake.back() = m_head;
 	m_snekManager->GetDraw()->DrawCharacter('@', snake.back());
 	return;
 };
@@ -63,13 +65,6 @@ void Player::Move() {
 		m_head.Y = snake.back().Y + 1;
 		break;
 	}
-	/*if(m_head.X == m_game->m_apple.X && m_head.Y == m_game->m_apple.Y) {
-		Redraw(true);
-	}
-	else {
-		Redraw(false);
-	}*/
-	Redraw(false);
 }
 
 Player::Player(SnekManager* sm) {

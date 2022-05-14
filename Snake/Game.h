@@ -4,7 +4,6 @@
 
 #include "SnekManager.h"
 #include "Player.h"
-#include "Draw.h"
 
 class Game {
 public:

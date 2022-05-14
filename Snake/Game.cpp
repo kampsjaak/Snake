@@ -8,15 +8,18 @@
 
 void Game::SpawnApple() {
 	int rng = rand();
-	COORD pos = { rng % m_snekManager->width, 0 % m_snekManager->height };
+	COORD pos = { rng % m_snekManager->width, rng % m_snekManager->height };
 	//while(Game::m_player->IsAtPosition(pos)) {
 	//	// evaluate, reroll
 	//}
-	m_snekManager->GetDraw()->DrawCharacter('o', pos);
+	m_apple = pos;
+	m_snekManager->GetDraw()->DrawCharacter('o', m_apple);
 	return;
 }
 
 Game::Game(SnekManager* sm, Player* player) {
+	srand(time(0));
+
 	// member variable assignment
 	m_snekManager = sm;
 	m_player = player;
@@ -26,11 +29,16 @@ Game::Game(SnekManager* sm, Player* player) {
 	
 	SpawnApple();
 
-	srand(time(0));
 	return;
 };
 
 void Game::Update() {
 	m_player->Move();
+	if(m_player->m_head.X == m_apple.X && m_player->m_head.Y == m_apple.Y) {
+		m_player->Redraw(true);
+		SpawnApple();
+	} else {
+		m_player->Redraw(false);
+	}
 	return;
 }
