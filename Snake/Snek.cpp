@@ -25,19 +25,19 @@ Game theGame(&snekManager, &thePlayer);
 
 void HandleInputs() {
 	if (GetAsyncKeyState(0x41)) {
-		if (thePlayer.m_heading == Heading::Right) return;
+		if (thePlayer.m_previousHeading == Heading::Right) return;
 		thePlayer.m_heading = Heading::Left;
 		return;
 	} else if(GetAsyncKeyState(0x44)) {
-		if (thePlayer.m_heading == Heading::Left) return;
+		if (thePlayer.m_previousHeading == Heading::Left) return;
 		thePlayer.m_heading = Heading::Right;
 		return;
 	} else if(GetAsyncKeyState(0x57)) {
-		if (thePlayer.m_heading == Heading::Down) return;
+		if (thePlayer.m_previousHeading == Heading::Down) return;
 		thePlayer.m_heading = Heading::Top;
 		return;
 	} else if(GetAsyncKeyState(0x53)) {
-		if (thePlayer.m_heading == Heading::Top) return;
+		if (thePlayer.m_previousHeading == Heading::Top) return;
 		thePlayer.m_heading = Heading::Down;
 		return;
 	}
@@ -45,7 +45,6 @@ void HandleInputs() {
 
 int main()
 {
-
 	while (!GetAsyncKeyState(VK_ESCAPE))
 	{
 		HandleInputs();

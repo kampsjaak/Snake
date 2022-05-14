@@ -25,7 +25,9 @@ void Player::Redraw(bool grow) {
 	m_snekManager->GetDraw()->DrawCharacter(' ', snake.front());
 
 	// snek eat apple
-	if(!grow) {
+	if(grow) {
+		snake.push_back(m_head);
+	} else {
 		// shift array over 1 overwriting the tail
 		for (size_t i = 0; i < snake.size() - 1; i++) {
 			snake[i].X = snake[i + 1].X;
@@ -33,20 +35,20 @@ void Player::Redraw(bool grow) {
 		}
 		// add head position
 		snake.back() = m_head;
-	} else {
-		snake.push_back(m_head);
 	}
 
 	m_snekManager->GetDraw()->DrawCharacter('@', snake.back());
 	return;
 };
 
-void Player::Initialise() {
+void Player::Initialise(std::vector<COORD> _snake) {
+	snake = _snake;
 	m_heading = Heading::Right;
 	DrawSelf();
 }
 
 void Player::Move() {
+	m_previousHeading = m_heading;
 	switch (m_heading) {
 	case Heading::Left:
 		m_head.X = snake.back().X - 1;

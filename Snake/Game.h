@@ -12,6 +12,7 @@ public:
 
 	void Update();
 	void SpawnApple();
+	void SpawnApple(COORD);
 
 	SnekManager* m_snekManager{};
 	Player* m_player{};

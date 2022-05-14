@@ -6,26 +6,33 @@
 #include "Game.h"
 #include <ctime>
 
-void Game::SpawnApple() {
-	int rng = rand();
-	COORD pos = { rng % m_snekManager->width, rng % m_snekManager->height };
-	//while(Game::m_player->IsAtPosition(pos)) {
-	//	// evaluate, reroll
-	//}
+void Game::SpawnApple(COORD pos) {
 	m_apple = pos;
 	m_snekManager->GetDraw()->DrawCharacter('o', m_apple);
 	return;
 }
 
+void Game::SpawnApple() {
+	unsigned int rng = rand();
+	COORD pos = { 
+		static_cast<short>(rng % m_snekManager->width), 
+		static_cast<short>(rng % m_snekManager->height)
+	};
+	//while(Game::m_player->IsAtPosition(pos)) {
+	//	// evaluate, reroll
+	//}
+	SpawnApple(pos);
+}
+
 Game::Game(SnekManager* sm, Player* player) {
-	srand(time(0));
+	srand((unsigned int)(time(0)));
 
 	// member variable assignment
 	m_snekManager = sm;
 	m_player = player;
 
 	// initialise gameplay systems
-	m_player->Initialise();
+	m_player->Initialise({ { 0,5 }, { 1,5 }, { 2,5 } });
 	
 	SpawnApple();
 

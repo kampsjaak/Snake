@@ -17,14 +17,15 @@ class Player {
 public:
 	Player(SnekManager*);
 
-	void Initialise();
+	void Initialise(std::vector<COORD>);
 	void Move();
 	void DrawSelf();
 	void Redraw(bool);
 	bool IsAtPosition(COORD);
 	
-	std::vector<COORD> snake{{ 0,5 }, { 1,5 }, { 2,5 }};
-	Heading m_heading = Heading::Left;
+	std::vector<COORD> snake;
+	Heading m_heading = Heading::Right;
+	Heading m_previousHeading = Heading::Right;
 	COORD m_head = { -1,-1 };
 private:
 	SnekManager* m_snekManager{};
