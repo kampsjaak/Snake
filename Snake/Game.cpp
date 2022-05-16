@@ -24,7 +24,19 @@ void Game::SpawnApple() {
 	SpawnApple(pos);
 }
 
+bool Game::PlayerWithinBounds(Player* player) {
+	COORD* head = &player->snake.back();
+	if (	head->X < 0
+		||	head->Y < 0
+		||	head->X > m_snekManager->width
+		||	head->Y > m_snekManager->height) {
+		return false;
+	}
+	return true;
+}
+
 Game::Game(SnekManager* sm, Player* player) {
+	// initialise dependencies
 	srand((unsigned int)(time(0)));
 
 	// member variable assignment
@@ -33,7 +45,6 @@ Game::Game(SnekManager* sm, Player* player) {
 
 	// initialise gameplay systems
 	m_player->Initialise({ { 0,5 }, { 1,5 }, { 2,5 } });
-	
 	SpawnApple();
 
 	return;
@@ -47,5 +58,9 @@ void Game::Update() {
 	} else {
 		m_player->Redraw(false);
 	}
+	if (!PlayerWithinBounds(m_player)) { 
+		m_gameState = GameState::GAME_OVER;
+		return; 
+	};
 	return;
 }
