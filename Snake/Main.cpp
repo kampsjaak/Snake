@@ -11,7 +11,6 @@
 #include "util.h"
 
 const unsigned int programUpdateStep = 175; //ms
-unsigned long int tick = 0;
 
 // drawing logic
 consoleSize cs = GetConsoleSize();
@@ -55,7 +54,6 @@ int main()
 				HandleInputs();
 				theGame.Update();
 				std::this_thread::sleep_for(std::chrono::milliseconds(programUpdateStep));
-				tick++;
 				break;
 			case GameState::GAME_OVER:
 				break;
