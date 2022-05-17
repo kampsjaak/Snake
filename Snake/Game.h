@@ -21,5 +21,6 @@ public:
 	Player* m_player{};
 	COORD m_apple = { 0, 1 };
 private:
-	bool PlayerWithinBounds(Player*);
+	bool PlayerOutOfBounds(Player*);
+	bool PlayerTouchesSelf(Player*);
 };

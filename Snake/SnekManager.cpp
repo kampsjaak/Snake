@@ -1,6 +1,6 @@
 #include "SnekManager.h"
 
-SnekManager::SnekManager(Draw* d, uint32_t w, uint32_t h) {
+SnekManager::SnekManager(Draw* d, short w, short h) {
 	m_draw = d;
 	width = w;
 	height = h;

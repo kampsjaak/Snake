@@ -11,31 +11,34 @@ void Game::SpawnApple(COORD pos) {
 }
 
 void Game::SpawnApple() {
-	unsigned int rng = rand();
+	short rng = static_cast<short>(rand());
+	// FIXME: Do something more intelligent
 	COORD pos = { 
-		static_cast<short>(rng % m_snekManager->width), 
-		static_cast<short>(rng % m_snekManager->height)
+		rng % m_snekManager->width, 
+		rng % m_snekManager->height
 	};
-	//while(Game::m_player->IsAtPosition(pos)) {
-	//	// evaluate, reroll
-	//}
 	SpawnApple(pos);
 }
 
-bool Game::PlayerWithinBounds(Player* player) {
+bool Game::PlayerOutOfBounds(Player* player) {
 	COORD* head = &player->snake.back();
 	if (	head->X < 0
 		||	head->Y < 0
 		||	head->X > m_snekManager->width
 		||	head->Y > m_snekManager->height) {
-		return false;
+		return true;
 	}
-	return true;
+	return false;
 }
+
+bool Game::PlayerTouchesSelf(Player* player) {
+	if (player->IsAtPosition(player->snake.back())) return true;
+	return false;
+};
 
 Game::Game(SnekManager* sm, Player* player) {
 	// initialise dependencies
-	srand((unsigned int)(time(0)));
+	srand(static_cast<unsigned int>(time(0)));
 
 	// member variable assignment
 	m_snekManager = sm;
@@ -56,7 +59,7 @@ void Game::Update() {
 	} else {
 		m_player->Redraw(false);
 	}
-	if (!PlayerWithinBounds(m_player)) { 
+	if (PlayerOutOfBounds(m_player)) { 
 		m_gameState = GameState::GAME_OVER;
 		return; 
 	};

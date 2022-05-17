@@ -22,5 +22,5 @@ public:
 	Heading m_previousHeading = Heading::Right;
 	COORD m_head = { -1,-1 };
 private:
-	SnekManager* m_snekManager{};
+	SnekManager* m_snekManager;
 };
