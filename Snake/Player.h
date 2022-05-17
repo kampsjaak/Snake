@@ -5,19 +5,13 @@
 
 #include "SnekManager.h"
 #include "Draw.h"
-
-enum class Heading {
-	Top,
-	Down,
-	Left,
-	Right
-};
+#include "Enums.h"
 
 class Player {
 public:
 	Player(SnekManager*);
 
-	void Initialise(std::vector<COORD>);
+	void Initialise(std::vector<COORD>, Heading);
 	void Move();
 	void DrawSelf();
 	void Redraw(bool);

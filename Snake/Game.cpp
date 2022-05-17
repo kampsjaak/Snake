@@ -1,10 +1,8 @@
 #include <iostream>
 #include <windows.h > // input https://visualstudioclient.gallerycdn.vsassets.io/extensions/visualstudioclient/microsoftvisualstudio2017installerprojects/1.0.0/1620063166533/InstallerProjects.vsix
-
-#include "Player.h"
-#include "Draw.h"
-#include "Game.h"
 #include <ctime>
+
+#include "Game.h"
 
 void Game::SpawnApple(COORD pos) {
 	m_apple = pos;
@@ -44,7 +42,7 @@ Game::Game(SnekManager* sm, Player* player) {
 	m_player = player;
 
 	// initialise gameplay systems
-	m_player->Initialise({ { 0,5 }, { 1,5 }, { 2,5 } });
+	m_player->Initialise({ { 0,5 }, { 1,5 }, { 2,5 } }, Heading::Right);
 	SpawnApple();
 
 	return;

@@ -1,10 +1,7 @@
 #include <vector>
 #include <iostream>
 
-#include "Game.h"
 #include "Player.h"
-#include "Draw.h"
-#include "SnekManager.h"
 
 void Player::DrawSelf() {
 	unsigned char snekChar = m_snekManager->GetDraw()->m_charSnek;
@@ -41,7 +38,7 @@ void Player::Redraw(bool grow) {
 	return;
 };
 
-void Player::Initialise(std::vector<COORD> _snake) {
+void Player::Initialise(std::vector<COORD> _snake, Heading h) {
 	snake = _snake;
 	m_heading = Heading::Right;
 	DrawSelf();

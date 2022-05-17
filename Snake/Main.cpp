@@ -47,7 +47,7 @@ int main()
 {
 	while (!GetAsyncKeyState(VK_ESCAPE))
 	{
-		switch(theGame.gameState)
+		switch(theGame.m_gameState)
 		{
 			case GameState::RUNNING:
 				HandleInputs();
