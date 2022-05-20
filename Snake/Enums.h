@@ -6,3 +6,5 @@ enum class Heading {
 	Left,
 	Right
 };
+
+enum class GameState { MENU, RUNNING, GAME_OVER };

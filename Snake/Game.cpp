@@ -4,6 +4,13 @@
 
 #include "Game.h"
 
+COORD Game::RandomPosition() {
+	short rng = static_cast<short>(rand());
+	return { static_cast<short>(rng % m_snekManager->width),
+		static_cast<short>(rng % m_snekManager->height)
+		};
+}
+
 void Game::SpawnApple(COORD pos) {
 	m_apple = pos;
 	m_snekManager->GetDraw()->DrawCharacter('o', m_apple);
@@ -11,13 +18,8 @@ void Game::SpawnApple(COORD pos) {
 }
 
 void Game::SpawnApple() {
-	short rng = static_cast<short>(rand());
 	// FIXME: Do something more intelligent
-	COORD pos = { 
-		rng % m_snekManager->width, 
-		rng % m_snekManager->height
-	};
-	SpawnApple(pos);
+	SpawnApple(RandomPosition());
 }
 
 bool Game::PlayerOutOfBounds(Player* player) {
@@ -45,6 +47,7 @@ Game::Game(SnekManager* sm, Player* player) {
 	m_player = player;
 
 	// initialise gameplay systems
+	m_snekManager->GetInterface()->DrawGameUI(m_snekManager);
 	m_player->Initialise({ { 0,5 }, { 1,5 }, { 2,5 } }, Heading::Right);
 	SpawnApple();
 

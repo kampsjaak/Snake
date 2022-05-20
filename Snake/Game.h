@@ -4,8 +4,7 @@
 
 #include "SnekManager.h"
 #include "Player.h"
-
-enum class GameState { MENU, RUNNING, GAME_OVER };
+#include "Enums.h"
 
 class Game {
 public:
@@ -15,6 +14,7 @@ public:
 	void Update();
 	void SpawnApple();
 	void SpawnApple(COORD);
+	COORD RandomPosition();
 
 	GameState m_gameState = GameState::RUNNING;
 	SnekManager* m_snekManager{};

@@ -5,7 +5,6 @@
 #include <ctime> // random nummer generation
 
 #include "SnekManager.h"
-#include "Interface.h"
 #include "Game.h"
 #include "Player.h"
 #include "util.h"
@@ -16,13 +15,14 @@ const unsigned int programUpdateStep = 175; //ms
 consoleSize cs = GetConsoleSize();
 Draw d(cs.w, cs.h);
 SnekManager snekManager(&d, 40, 10);
-Interface interf(&snekManager);
 
 // classes that draw themselves
 Player thePlayer(&snekManager);
 
 // manager of classes that draw themselves
 Game theGame(&snekManager, &thePlayer);
+
+// save/load states and serialisation layer?
 
 void HandleInputs() {
 	if (GetAsyncKeyState(0x41)) {

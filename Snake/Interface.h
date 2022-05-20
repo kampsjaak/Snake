@@ -4,11 +4,10 @@
 
 class Interface {
 public: 
-	Interface(SnekManager*);
-	void DrawMainMenu();
-	void DrawGameOver();
-	void DrawGameUI();
+	Interface();
+	void DrawMainMenu(SnekManager*);
+	void DrawGameOver(SnekManager*);
+	void DrawGameUI(SnekManager*);
 	void UpdateGameUIScore(int);
 private:
-	SnekManager* m_snekManager{};
 };
