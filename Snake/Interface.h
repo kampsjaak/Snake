@@ -5,9 +5,8 @@
 class Interface {
 public: 
 	Interface();
-	void DrawMainMenu(SnekManager*);
-	void DrawGameOver(SnekManager*);
-	void DrawGameUI(SnekManager*);
+	void DrawMainMenu(SnekManager* sm);
+	void DrawGameOver(SnekManager* sm);
+	void DrawGameUI(SnekManager* sm);
 	void UpdateGameUIScore(int);
-private:
 };

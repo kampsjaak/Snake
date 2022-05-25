@@ -17,9 +17,11 @@ public:
 	COORD RandomPosition();
 
 	GameState m_gameState = GameState::RUNNING;
+
+	COORD m_apple = { 0, 1 };
+	
 	SnekManager* m_snekManager{};
 	Player* m_player{};
-	COORD m_apple = { 0, 1 };
 private:
 	bool PlayerOutOfBounds(Player*);
 	bool PlayerTouchesSelf(Player*);

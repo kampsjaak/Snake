@@ -17,10 +17,11 @@ public:
 	void Redraw(bool);
 	bool IsAtPosition(COORD);
 	
-	std::vector<COORD> snake;
 	Heading m_heading = Heading::Right;
 	Heading m_previousHeading = Heading::Right;
+	
 	COORD m_head = { -1,-1 };
+	std::vector<COORD> snake;
 private:
 	SnekManager* m_snekManager;
 };

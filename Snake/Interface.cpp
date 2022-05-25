@@ -4,23 +4,23 @@ Interface::Interface() {
 	return;
 };
 
-void Interface::DrawMainMenu(SnekManager& sm) {
+void Interface::DrawMainMenu(SnekManager* sm) {
 	return;
 };
 
-void Interface::DrawGameOver() {
+void Interface::DrawGameOver(SnekManager* sm) {
 	return;
 };
 
-void Interface::DrawGameUI() {
+void Interface::DrawGameUI(SnekManager* sm) {
 	COORD a = {0, 0};
-	COORD b = {0, m_snekManager->height};
+	COORD b = {0, sm->height};
 
-	for (short i = 0; i <= m_snekManager->width; i++) {
+	for (short i = 0; i <= sm->width; i++) {
 		a.X = i;
 		b.X = i;
-		m_snekManager->GetDraw()->DrawCharacter('+', a);
-		m_snekManager->GetDraw()->DrawCharacter('+', b);
+		sm->GetDraw()->DrawCharacter('+', a);
+		sm->GetDraw()->DrawCharacter('+', b);
 
 	}
 	return;

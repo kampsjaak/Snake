@@ -47,7 +47,7 @@ Game::Game(SnekManager* sm, Player* player) {
 	m_player = player;
 
 	// initialise gameplay systems
-	m_snekManager->GetInterface()->DrawGameUI(m_snekManager);
+	//m_snekManager->GetInterface()->DrawGameUI(m_snekManager);
 	m_player->Initialise({ { 0,5 }, { 1,5 }, { 2,5 } }, Heading::Right);
 	SpawnApple();
 
