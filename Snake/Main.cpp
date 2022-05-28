@@ -5,11 +5,9 @@
 #include <ctime> // random nummer generation
 
 #include "SnekManager.h"
-#include "Interface.h"
 #include "Game.h"
 #include "Player.h"
 #include "util.h"
-
 
 const unsigned int programUpdateStep = 175; //ms
 
@@ -17,7 +15,6 @@ const unsigned int programUpdateStep = 175; //ms
 consoleSize cs = GetConsoleSize();
 Draw d(cs.w, cs.h);
 SnekManager snekManager(&d, 40, 10);
-Interface i = Interface();
 
 // classes that draw themselves
 Player thePlayer(&snekManager);

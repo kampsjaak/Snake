@@ -13,12 +13,12 @@ public:
 
 	void Update();
 	void SpawnApple();
-	void SpawnApple(COORD);
+	void SpawnApple(COORD*, COORD);
 	COORD RandomPosition();
 
 	GameState m_gameState = GameState::RUNNING;
 
-	COORD m_apple = { 0, 1 };
+	std::vector<COORD> m_apples = { { 0, 1 }, { 0, 2 }, { 0, 3 }, { 0, 4 }, { 0, 5 } };
 	
 	SnekManager* m_snekManager{};
 	Player* m_player{};

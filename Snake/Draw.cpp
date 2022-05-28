@@ -17,3 +17,29 @@ void Draw::DrawCharacter(const char character, COORD position) {
 	WriteConsole(m_hConsole, &m_printChar, 1, NULL, NULL);
 	SetConsoleCursorPosition(m_hConsole, m_returnPosition);
 };
+
+void Draw::DrawMainMenu() {
+	return;
+};
+
+void Draw::DrawGameOver() {
+	return;
+};
+
+void Draw::DrawGameUI(short width, short height) {
+	COORD a = { 0, 0 };
+	COORD b = { 0, height };
+
+	for (short i = 0; i <= width; i++) {
+		a.X = i;
+		b.X = i;
+		DrawCharacter('+', a);
+		DrawCharacter('+', b);
+
+	}
+	return;
+};
+
+void Draw::UpdateGameUIScore(int score) {
+	return;
+};

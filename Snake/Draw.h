@@ -23,6 +23,10 @@ class Draw {
 public:
 	Draw(uint32_t, uint32_t);
 	void DrawCharacter(char, COORD);
+	void DrawMainMenu();
+	void DrawGameOver();
+	void DrawGameUI(short, short);
+	void UpdateGameUIScore(int);
 	unsigned char m_charSnek = '@';
 private:
 	unsigned char m_printChar = ' ';
@@ -31,5 +35,4 @@ private:
 	HANDLE m_hConsole {};
 	COORD cursorPos = { 0, 0 };
 	COORD m_returnPosition = {0, 0};
-
 };

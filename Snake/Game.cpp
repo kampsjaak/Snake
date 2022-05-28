@@ -11,15 +11,15 @@ COORD Game::RandomPosition() {
 		};
 }
 
-void Game::SpawnApple(COORD pos) {
-	m_apple = pos;
-	m_snekManager->GetDraw()->DrawCharacter('o', m_apple);
+void Game::SpawnApple(COORD* apple, COORD pos) {
+	apple = &pos;
+	m_snekManager->GetDraw()->DrawCharacter('o', *apple);
 	return;
 }
 
 void Game::SpawnApple() {
 	// FIXME: Do something more intelligent
-	SpawnApple(RandomPosition());
+	SpawnApple(&m_apples[0], RandomPosition());
 }
 
 bool Game::PlayerOutOfBounds(Player* player) {
@@ -56,7 +56,7 @@ Game::Game(SnekManager* sm, Player* player) {
 
 void Game::Update() {
 	m_player->Move();
-	if(m_player->m_head.X == m_apple.X && m_player->m_head.Y == m_apple.Y) {
+	if(m_player->m_head.X == m_apples[0].X && m_player->m_head.Y == m_apples[0].Y) {
 		m_player->Redraw(true);
 		SpawnApple();
 	} else {
