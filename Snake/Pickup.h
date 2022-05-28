@@ -1,11 +1,15 @@
 #pragma once
 
 #include <windows.h>
+#include "Draw.h"
 
 class Pickup {
 public:
 	Pickup();
-	void SetCoord(COORD c) { m_position = c; };
+	static Draw* m_draw;
+	static void Initialise(Draw*);
+
+	void SetCoord(COORD);
 	COORD GetCoord() { return m_position; };
 private:
 	COORD m_position = {0, 0};

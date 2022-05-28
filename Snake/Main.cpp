@@ -7,6 +7,7 @@
 #include "SnekManager.h"
 #include "Game.h"
 #include "Player.h"
+#include "Pickup.h"
 #include "util.h"
 
 const unsigned int programUpdateStep = 175; //ms
@@ -18,6 +19,7 @@ SnekManager snekManager(&d, 40, 10);
 
 // classes that draw themselves
 Player thePlayer(&snekManager);
+
 
 // manager of classes that draw themselves
 Game theGame(&snekManager, &thePlayer);
@@ -46,6 +48,7 @@ void HandleInputs() {
 
 int main()
 {
+	Pickup::Initialise(&d);
 	while (!GetAsyncKeyState(VK_ESCAPE))
 	{
 		switch(theGame.m_gameState)
