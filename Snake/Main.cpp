@@ -20,7 +20,6 @@ SnekManager snekManager(&d, 40, 10);
 // classes that draw themselves
 Player thePlayer(&snekManager);
 
-// ignore this line
 // manager of classes that draw themselves
 Game theGame(&snekManager, &thePlayer);
 
