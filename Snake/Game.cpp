@@ -5,7 +5,7 @@
 #include "Game.h"
 
 COORD Game::RandomPosition() {
-	short rng = static_cast<short>(rand());
+	auto rng = static_cast<short>(rand());
 	return { static_cast<short>(rng % m_snekManager->width),
 		static_cast<short>(rng % m_snekManager->height)
 		};
@@ -18,7 +18,8 @@ void Game::SpawnApple(COORD* apple, COORD pos) {
 }
 
 void Game::SpawnApple() {
-	// FIXME: Do something more intelligent
+	// FIXME:	Do something more intelligent
+	//			Should there be a world and apple manager?
 	SpawnApple(&m_apples[0], RandomPosition());
 }
 
