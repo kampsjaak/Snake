@@ -54,15 +54,24 @@ int main(int argc, char* argv[])
 		}
 
 		unsigned short len = 0;
-		
+
+		int width = 0;
+		int height = 0;
+
 		for (int i = 0; i < argc; i++) {
-			//printf("argv[%d] = %s~\n", i, argv[i]);
-			if (strcmp(argv[i], "jemoeder") == 0) {
-				auto value = argv[i];
-				if (len <= i + 1) {
-					value = argv[i + 1];
+			if (strcmp(argv[i], "width") == 0) {
+				if (i + 1 < argc) {
+					std::string str = "";
+					str.append(argv[i+1]);
+					width = std::stoi(str);
 				}
-				printf("jemoeder: %d", value);
+			} 
+			else if (strcmp(argv[i], "height") == 0) {
+				if (i + 1 <= argc) {
+					std::string str2 = "";
+					str2.append(argv[i+1]);
+					height = std::stoi(str2);
+				}
 			}
 		}
 	}
@@ -75,24 +84,24 @@ int main(int argc, char* argv[])
 	//
 	Player thePlayer(&snekManager);
 	Game theGame(&snekManager, &thePlayer);
-	
+
 	//Pickup::Initialise(&d);
 
 	while (!GetAsyncKeyState(VK_ESCAPE))
 	{
-		switch(theGame.m_gameState)
+		switch (theGame.m_gameState)
 		{
-			case GameState::RUNNING:
-				HandleInputs(&thePlayer);
-				theGame.Update();
-				std::this_thread::sleep_for(std::chrono::milliseconds(programUpdateStep));
-				break;
-			case GameState::GAME_OVER:
-				break;
-			case GameState::MENU:
-				break;
-			default:
-				break;
+		case GameState::RUNNING:
+			HandleInputs(&thePlayer);
+			theGame.Update();
+			std::this_thread::sleep_for(std::chrono::milliseconds(programUpdateStep));
+			break;
+		case GameState::GAME_OVER:
+			break;
+		case GameState::MENU:
+			break;
+		default:
+			break;
 		}
 	}
 	system("cls");
