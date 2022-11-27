@@ -1,6 +1,7 @@
 #include <iostream>
 #include <windows.h > // input https://visualstudioclient.gallerycdn.vsassets.io/extensions/visualstudioclient/microsoftvisualstudio2017installerprojects/1.0.0/1620063166533/InstallerProjects.vsix
 #include <ctime>
+#include <vector>
 
 #include "Game.h"
 #include "SnekManager.h"
@@ -49,6 +50,14 @@ Game::Game(SnekManager* sm, Player* player) {
 	// member variable assignment
 	m_snekManager = sm;
 	m_player = player;
+
+	for (int i = 0; i < Game::s_width * Game::s_height; i++) {
+		COORD c = { 
+			i / Game::s_width, 
+			i % Game::s_width
+		};
+		freeSlots.insert(freeSlots.begin() + i, m_player->IsAtPosition(c));
+	}
 
 	// initialise gameplay systems
 	//m_snekManager->GetInterface()->DrawGameUI(m_snekManager);

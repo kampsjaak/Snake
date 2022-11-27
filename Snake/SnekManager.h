@@ -5,7 +5,7 @@
 
 class SnekManager {
 public:
-	SnekManager(Draw*, short, short);
+	SnekManager(Draw*, const unsigned short, const unsigned short);
 	Draw* GetDraw() { return m_draw; };
 	short width = 0;
 	short height = 0;

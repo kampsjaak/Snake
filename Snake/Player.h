@@ -8,6 +8,7 @@
 
 class Player {
 public:
+	Player() {};
 	Player(SnekManager*);
 
 	void Initialise(std::vector<COORD>, Heading);
