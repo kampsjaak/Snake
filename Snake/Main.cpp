@@ -9,6 +9,7 @@
 #include "Player.h"
 #include "Pickup.h"
 #include "util.h"
+#include "Draw.h"
 
 const unsigned int programUpdateStep = 175; //ms
 
@@ -17,10 +18,8 @@ consoleSize cs = GetConsoleSize();
 Draw d(cs.w, cs.h);
 SnekManager snekManager(&d, 40, 10);
 
-// classes that draw themselves
+//
 Player thePlayer(&snekManager);
-
-// manager of classes that draw themselves
 Game theGame(&snekManager, &thePlayer);
 
 // save/load states and serialisation layer?
@@ -47,7 +46,7 @@ void HandleInputs() {
 
 int main()
 {
-	Pickup::Initialise(&d);
+	//Pickup::Initialise(&d);
 	while (!GetAsyncKeyState(VK_ESCAPE))
 	{
 		switch(theGame.m_gameState)

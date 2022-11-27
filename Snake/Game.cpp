@@ -3,6 +3,9 @@
 #include <ctime>
 
 #include "Game.h"
+#include "SnekManager.h"
+#include "Draw.h"
+#include "Player.h"
 
 COORD Game::RandomPosition() {
 	auto rng = static_cast<short>(rand());

@@ -3,8 +3,7 @@
 #include <vector>
 #include <string>
 
-#include "SnekManager.h"
-#include "Draw.h"
+#include "Forward.h"
 #include "Enums.h"
 
 class Player {

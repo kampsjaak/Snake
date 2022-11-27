@@ -2,8 +2,7 @@
 #include <windows.h>
 #include <vector>
 
-#include "SnekManager.h"
-#include "Player.h"
+#include "Forward.h"
 #include "Enums.h"
 
 class Game {

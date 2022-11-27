@@ -1,4 +1,8 @@
+#include <windows.h>
+
 #include "Interface.h"
+#include "SnekManager.h"
+#include "Draw.h"
 
 Interface::Interface() {
 	return;

@@ -1,7 +1,7 @@
 #pragma once 
 #include <stdint.h>
 
-#include "Draw.h"
+#include "Forward.h"
 
 class SnekManager {
 public:
