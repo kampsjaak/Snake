@@ -1,7 +1,10 @@
 #include <vector>
 #include <iostream>
+#include <windows.h>
 
 #include "Player.h"
+#include "SnekManager.h"
+#include "Draw.h"
 
 void Player::DrawSelf() {
 	unsigned char snekChar = m_snekManager->GetDraw()->m_charSnek;

@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="Draw.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Interface.cpp" />
     <ClCompile Include="Pickup.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -149,7 +150,9 @@
   <ItemGroup>
     <ClInclude Include="Draw.h" />
     <ClInclude Include="Enums.h" />
+    <ClInclude Include="Forward.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Interface.h" />
     <ClInclude Include="Pickup.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="SnekManager.h" />
