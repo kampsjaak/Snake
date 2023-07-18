@@ -1,6 +1,7 @@
 #include <windows.h>
 #include <stdint.h>
 #include <windows.h>
+#include <iostream>
 
 #include "Draw.h"
 
@@ -27,9 +28,9 @@ void Draw::DrawGameOver() {
 	return;
 };
 
-void Draw::DrawGameUI(short width, short height) {
+void Draw::DrawGameUI(short width, unsigned int score, unsigned short lives) {
 	COORD a = { 0, 0 };
-	COORD b = { 0, height };
+	COORD b = { 0, 1 };
 
 	for (short i = 0; i <= width; i++) {
 		a.X = i;
@@ -38,6 +39,10 @@ void Draw::DrawGameUI(short width, short height) {
 		DrawCharacter('+', b);
 
 	}
+	const std::string scoreboard_line_0 = "Score: ";
+	const std::string scoreboard_line_1 = "Lives: ";
+	std::cout << scoreboard_line_0 << score << std::endl;
+	std::cout << scoreboard_line_1 << lives << std::endl;
 	return;
 };
 

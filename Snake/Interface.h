@@ -1,4 +1,5 @@
-#include "Forward.h"
+#include "SnekManager.h"
+#include "SnekManager.h"
 
 class Interface {
 public:

@@ -3,7 +3,7 @@
 #include <vector>
 #include <string>
 
-#include "Forward.h"
+#include "SnekManager.h"
 #include "Enums.h"
 
 class Player {
@@ -23,5 +23,5 @@ public:
 	COORD m_head = { -1,-1 };
 	std::vector<COORD> snake;
 private:
-	SnekManager* m_snekManager;
+	SnekManager* m_snekManager = {};
 };

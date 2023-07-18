@@ -30,7 +30,7 @@ void Game::SpawnApple() {
 bool Game::PlayerOutOfBounds(Player* player) {
 	COORD* head = &player->snake.back();
 	if (	head->X < 0
-		||	head->Y < 0
+		||	head->Y < m_snekManager->GetDraw()->m_hud_rows
 		||	head->X > m_snekManager->width
 		||	head->Y > m_snekManager->height) {
 		return true;
@@ -60,7 +60,7 @@ Game::Game(SnekManager* sm, Player* player) {
 	}
 
 	// initialise gameplay systems
-	//m_snekManager->GetInterface()->DrawGameUI(m_snekManager);
+	m_snekManager->GetDraw()->DrawGameUI(Game::s_width, Game::GetScore(), Game::GetLives());
 	m_player->Initialise({ { 0,5 }, { 1,5 }, { 2,5 } }, Heading::Right);
 	SpawnApple();
 

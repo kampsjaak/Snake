@@ -24,11 +24,12 @@ public:
 	Draw(uint32_t, uint32_t);
 
 	unsigned char m_charSnek = '@';
+	unsigned const short m_hud_rows = 2;
 	
 	void DrawCharacter(char, COORD);
 	void DrawMainMenu();
 	void DrawGameOver();
-	void DrawGameUI(short, short);
+	void DrawGameUI(short, unsigned int, unsigned short);
 	void UpdateGameUIScore(int);
 
 private:
@@ -37,6 +38,6 @@ private:
 	unsigned short m_screenRows = 20;
 	
 	HANDLE m_hConsole {};
-	COORD cursorPos = { 0, 0 };
+	COORD m_cursorPos = { 0, 0 };
 	COORD m_returnPosition = {0, 0};
 };
