@@ -43,24 +43,26 @@ bool Game::PlayerTouchesSelf(Player* player) {
 	return false;
 };
 
-Game::Game(SnekManager* sm, Player* player) {
+Game::Game(SnekManager* sm, Player* player, unsigned short width, unsigned short height) {
 	// initialise dependencies
 	srand(static_cast<unsigned int>(time(0)));
 
 	// member variable assignment
 	m_snekManager = sm;
 	m_player = player;
+	m_width = width;
+	m_height = height;
 
-	for (int i = 0; i < Game::s_width * Game::s_height; i++) {
+	for (int i = 0; i < Game::m_width * Game::m_height; i++) {
 		COORD c = { 
-			i / Game::s_width, 
-			i % Game::s_width
+			i / Game::m_width,
+			i % Game::m_width
 		};
 		freeSlots.insert(freeSlots.begin() + i, m_player->IsAtPosition(c));
 	}
 
 	// initialise gameplay systems
-	m_snekManager->GetDraw()->DrawGameUI(Game::s_width, Game::GetScore(), Game::GetLives());
+	m_snekManager->GetDraw()->DrawGameUI(Game::m_width, Game::GetScore(), Game::GetLives());
 	m_player->Initialise({ { 0,5 }, { 1,5 }, { 2,5 } }, Heading::Right);
 	SpawnApple();
 

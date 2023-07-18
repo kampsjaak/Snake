@@ -9,11 +9,10 @@
 class Game {
 public:
 	Game() {};
-	Game(SnekManager*, Player*);
+	Game(SnekManager*, Player*, unsigned short, unsigned short);
 	
-	//static Game the;
-	static unsigned short s_height;
-	static unsigned short s_width;
+	unsigned short m_height;
+	unsigned short m_width;
 
 	void Update();
 	void SpawnApple();
