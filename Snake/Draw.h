@@ -23,7 +23,7 @@ class Draw {
 public:
 	Draw(uint32_t, uint32_t);
 
-	unsigned char m_charSnek = '@';
+	unsigned char m_char_snek = '@';
 	unsigned const short m_hud_rows = 2;
 	
 	void DrawCharacter(char, COORD);
@@ -33,11 +33,11 @@ public:
 	void UpdateGameUIScore(int);
 
 private:
-	unsigned char m_printChar = ' ';
-	unsigned short m_screenColums = 20;
-	unsigned short m_screenRows = 20;
+	unsigned char m_print_char = ' ';
+	unsigned short m_screen_colums = 20;
+	unsigned short m_screen_rows = 20;
 	
 	HANDLE m_hConsole {};
-	COORD m_cursorPos = { 0, 0 };
-	COORD m_returnPosition = {0, 0};
+	COORD m_cursor_pos = { 0, 0 };
+	COORD m_return_position = {0, 0};
 };

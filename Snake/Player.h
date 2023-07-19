@@ -18,10 +18,10 @@ public:
 	bool IsAtPosition(COORD);
 	
 	Heading m_heading = Heading::Right;
-	Heading m_previousHeading = Heading::Right;
+	Heading m_previous_heading = Heading::Right;
 	
 	COORD m_head = { -1,-1 };
-	std::vector<COORD> snake;
+	std::vector<COORD> m_snake;
 private:
-	SnekManager* m_snekManager = {};
+	SnekManager* m_snek_manager = {};
 };

@@ -28,7 +28,7 @@ void Game::SpawnApple() {
 }
 
 bool Game::PlayerOutOfBounds(Player* player) {
-	COORD* head = &player->snake.back();
+	COORD* head = &player->m_snake.back();
 	if (	head->X < 0
 		||	head->Y < m_snekManager->GetDraw()->m_hud_rows
 		||	head->X > m_snekManager->width
@@ -39,7 +39,7 @@ bool Game::PlayerOutOfBounds(Player* player) {
 }
 
 bool Game::PlayerTouchesSelf(Player* player) {
-	if (player->IsAtPosition(player->snake.back())) return true;
+	if (player->IsAtPosition(player->m_snake.back())) return true;
 	return false;
 };
 
