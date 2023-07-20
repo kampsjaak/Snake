@@ -23,7 +23,7 @@ class Draw {
 public:
 	Draw(uint32_t, uint32_t);
 
-	unsigned char m_char_snek = '@';
+	unsigned const char m_char_snek = '@';
 	unsigned const short m_hud_rows = 2;
 	
 	void DrawCharacter(char, COORD);

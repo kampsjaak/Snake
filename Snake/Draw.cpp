@@ -29,15 +29,14 @@ void Draw::DrawGameOver() {
 };
 
 void Draw::DrawGameUI(short width, unsigned int score, unsigned short lives) {
-	COORD a = { 0, 0 };
-	COORD b = { 0, 1 };
+	COORD line_0 = { 0, 0 };
+	COORD line_1 = { 0, 1 };
 
 	for (short i = 0; i <= width; i++) {
-		a.X = i;
-		b.X = i;
-		DrawCharacter('+', a);
-		DrawCharacter('+', b);
-
+		line_0.X = i;
+		line_1.X = i;
+		DrawCharacter('+', line_0);
+		DrawCharacter('+', line_1);
 	}
 	const std::string scoreboard_line_0 = "Score: ";
 	const std::string scoreboard_line_1 = "Lives: ";

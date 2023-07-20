@@ -11,6 +11,8 @@
 #include "util.h"
 #include "Draw.h"
 
+#include <lua.hpp>
+
 const unsigned int PROGRAM_UPDATE_STEP = 175; //ms
 unsigned short width = 40;
 unsigned short height = 10;
@@ -45,6 +47,20 @@ void HandleInputs() {
 
 int main()
 {
+
+	std::cout << "LUA is saying: ";
+
+	lua_State* L;
+	L = luaL_newstate();
+	lua_pushstring(L, "Anna");
+	lua_setglobal(L, "name");
+	luaL_openlibs(L);
+	if (luaL_dofile(L, "hello.lua")) {
+		std::cout << "Final:" << lua_tostring(L, -1) << "\n";
+	}
+	lua_close(L);
+
+
 	//Pickup::Initialise(&d);
 	while (!GetAsyncKeyState(VK_ESCAPE))
 	{
