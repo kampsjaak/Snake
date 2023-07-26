@@ -1,6 +1,4 @@
-#include <windows.h>
 #include <stdint.h>
-#include <windows.h>
 #include <iostream>
 
 #include "Draw.h"

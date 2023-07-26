@@ -45,9 +45,7 @@ void HandleInputs() {
 	}
 }
 
-int main()
-{
-
+void Initialise_Lua() {
 	std::cout << "LUA is saying: ";
 
 	lua_State* L;
@@ -59,8 +57,11 @@ int main()
 		std::cout << "Final:" << lua_tostring(L, -1) << "\n";
 	}
 	lua_close(L);
+}
 
-
+int main()
+{
+	Initialise_Lua();
 	//Pickup::Initialise(&d);
 	while (!GetAsyncKeyState(VK_ESCAPE))
 	{
