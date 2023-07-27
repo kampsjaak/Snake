@@ -10,6 +10,7 @@
 #include "Pickup.h"
 #include "util.h"
 #include "Draw.h"
+#include "Localisation.h"
 
 #include <lua.hpp>
 
@@ -17,13 +18,13 @@ const unsigned int PROGRAM_UPDATE_STEP = 175; //ms
 unsigned short width = 40;
 unsigned short height = 10;
 
+Localisation localisation;
 // drawing logic
 consoleSize cs = GetConsoleSize();
 Draw d(cs.w, cs.h);
 SnekManager snekManager(&d, width, height);
 
 Player thePlayer(&snekManager);
-Game theGame(&snekManager, &thePlayer, width, height);
 
 void HandleInputs() {
 	if (GetAsyncKeyState(0x41)) {
@@ -45,23 +46,11 @@ void HandleInputs() {
 	}
 }
 
-void Initialise_Lua() {
-	std::cout << "LUA is saying: ";
-
-	lua_State* L;
-	L = luaL_newstate();
-	lua_pushstring(L, "Anna");
-	lua_setglobal(L, "name");
-	luaL_openlibs(L);
-	if (luaL_dofile(L, "hello.lua")) {
-		std::cout << "Final:" << lua_tostring(L, -1) << "\n";
-	}
-	lua_close(L);
-}
-
 int main()
 {
-	Initialise_Lua();
+	localisation = Localisation(0);
+	Game theGame(&snekManager, &thePlayer, &localisation, width, height);
+
 	//Pickup::Initialise(&d);
 	while (!GetAsyncKeyState(VK_ESCAPE))
 	{

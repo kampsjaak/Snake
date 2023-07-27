@@ -26,7 +26,7 @@ void Draw::DrawGameOver() {
 	return;
 };
 
-void Draw::DrawGameUI(short width, unsigned int score, unsigned short lives) {
+void Draw::DrawGameUI(short width, unsigned int score, unsigned short lives, Localisation* localisation) {
 	COORD line_0 = { 0, 0 };
 	COORD line_1 = { 0, 1 };
 
@@ -36,8 +36,8 @@ void Draw::DrawGameUI(short width, unsigned int score, unsigned short lives) {
 		DrawCharacter('+', line_0);
 		DrawCharacter('+', line_1);
 	}
-	const std::string scoreboard_line_0 = "Score: ";
-	const std::string scoreboard_line_1 = "Lives: ";
+	const std::string scoreboard_line_0 = localisation->GetString(LocalisedString::SCORE) + ": ";
+	const std::string scoreboard_line_1 = localisation->GetString(LocalisedString::LIVES) + ": ";
 	std::cout << scoreboard_line_0 << score << std::endl;
 	std::cout << scoreboard_line_1 << lives << std::endl;
 	return;

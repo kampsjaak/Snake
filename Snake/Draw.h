@@ -2,6 +2,8 @@
 #include <windows.h>
 #include <stdint.h>
 
+#include "Localisation.h"
+
 #define BLACK			0
 #define BLUE			1
 #define GREEN			2
@@ -29,7 +31,7 @@ public:
 	void DrawCharacter(char, COORD);
 	void DrawMainMenu();
 	void DrawGameOver();
-	void DrawGameUI(short, unsigned int, unsigned short);
+	void DrawGameUI(short, unsigned int, unsigned short, Localisation*);
 	void UpdateGameUIScore(int);
 
 private:

@@ -43,7 +43,7 @@ bool Game::PlayerTouchesSelf(Player* player) {
 	return false;
 };
 
-Game::Game(SnekManager* sm, Player* player, unsigned short width, unsigned short height) {
+Game::Game(SnekManager* sm, Player* player, Localisation* localisation, unsigned short width, unsigned short height) {
 	// initialise dependencies
 	srand(static_cast<unsigned int>(time(0)));
 
@@ -52,6 +52,7 @@ Game::Game(SnekManager* sm, Player* player, unsigned short width, unsigned short
 	m_player = player;
 	m_width = width;
 	m_height = height;
+	m_localisation = localisation;
 
 	for (int i = 0; i < Game::m_width * Game::m_height; i++) {
 		COORD c = { 
@@ -62,7 +63,7 @@ Game::Game(SnekManager* sm, Player* player, unsigned short width, unsigned short
 	}
 
 	// initialise gameplay systems
-	m_snekManager->GetDraw()->DrawGameUI(Game::m_width, Game::GetScore(), Game::GetLives());
+	m_snekManager->GetDraw()->DrawGameUI(Game::m_width, Game::GetScore(), Game::GetLives(), m_localisation);
 	m_player->Initialise({ { 0,5 }, { 1,5 }, { 2,5 } }, Heading::Right);
 	SpawnApple();
 

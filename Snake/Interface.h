@@ -1,5 +1,4 @@
 #include "SnekManager.h"
-#include "SnekManager.h"
 
 class Interface {
 public:

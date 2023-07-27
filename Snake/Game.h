@@ -5,11 +5,12 @@
 #include "SnekManager.h"
 #include "Player.h"
 #include "Enums.h"
+#include "Localisation.h"
 
 class Game {
 public:
 	Game() {};
-	Game(SnekManager*, Player*, unsigned short, unsigned short);
+	Game(SnekManager*, Player*, Localisation*, unsigned short, unsigned short);
 	
 	unsigned short m_height;
 	unsigned short m_width;
@@ -23,8 +24,9 @@ public:
 	unsigned int GetScore() { return m_score; }
 	unsigned short GetLives() { return m_lives; }
 
-
 	GameState m_gameState = GameState::RUNNING;
+	Localisation* m_localisation;
+	Localisation* GetLocalisation() { return m_localisation; };
 
 	std::vector<COORD> m_apples = { { 0, 1 }, { 0, 2 }, { 0, 3 }, { 0, 4 }, { 0, 5 } };
 	

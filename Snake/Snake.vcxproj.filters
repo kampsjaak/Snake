@@ -262,7 +262,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="hello.lua">
+    <None Include="Language.lua">
       <Filter>Source Files</Filter>
     </None>
   </ItemGroup>
