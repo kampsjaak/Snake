@@ -15,53 +15,39 @@
 #include <lua.hpp>
 
 const unsigned int PROGRAM_UPDATE_STEP = 175; //ms
-unsigned short width = 40;
-unsigned short height = 10;
+const unsigned short WIDTH = 40;
+const unsigned short HEIGHT = 10;
+const unsigned short LANGUAGE = 0;
 
 Localisation localisation;
 // drawing logic
 consoleSize cs = GetConsoleSize();
 Draw d(cs.w, cs.h);
-SnekManager snekManager(&d, width, height);
 
-Player thePlayer(&snekManager);
-
-void HandleInputs() {
-	if (GetAsyncKeyState(0x41)) {
-		if (thePlayer.m_previous_heading == Heading::Right) return;
-		thePlayer.m_heading = Heading::Left;
-		return;
-	} else if(GetAsyncKeyState(0x44)) {
-		if (thePlayer.m_previous_heading == Heading::Left) return;
-		thePlayer.m_heading = Heading::Right;
-		return;
-	} else if(GetAsyncKeyState(0x57)) {
-		if (thePlayer.m_previous_heading == Heading::Down) return;
-		thePlayer.m_heading = Heading::Top;
-		return;
-	} else if(GetAsyncKeyState(0x53)) {
-		if (thePlayer.m_previous_heading == Heading::Top) return;
-		thePlayer.m_heading = Heading::Down;
-		return;
-	}
-}
+void HandleInputs(GameState state);
+Player player;
 
 int main()
 {
-	localisation = Localisation(0);
-	Game theGame(&snekManager, &thePlayer, &localisation, width, height);
+	SnekManager snek_manager(&d, WIDTH, HEIGHT);
+	player = Player(&snek_manager);
+	localisation = Localisation(LANGUAGE);
+	Game game(&snek_manager, &player, &localisation, WIDTH, HEIGHT);
 
 	//Pickup::Initialise(&d);
 	while (!GetAsyncKeyState(VK_ESCAPE))
 	{
-		switch(theGame.m_gameState)
+		switch(game.m_gameState)
 		{
 			case GameState::RUNNING:
-				HandleInputs();
-				theGame.Update();
+				HandleInputs(game.m_gameState);
+				game.Update();
 				std::this_thread::sleep_for(std::chrono::milliseconds(PROGRAM_UPDATE_STEP));
 				break;
 			case GameState::GAME_OVER:
+				system("cls");
+				std::cout << "sry bro snek ded";
+				std::this_thread::sleep_for(std::chrono::milliseconds(PROGRAM_UPDATE_STEP));
 				break;
 			case GameState::MENU:
 				break;
@@ -71,4 +57,42 @@ int main()
 	}
 	system("cls");
 	return 0;
+}
+
+void HandleInputs(GameState state) {
+	if (GetAsyncKeyState(0x41)) {
+		switch (state) {
+		case GameState::RUNNING:
+			if (player.m_previous_heading == Heading::Right) return;
+			player.m_heading = Heading::Left;
+			break;
+		}
+		return;
+	}
+	else if (GetAsyncKeyState(0x44)) {
+		switch (state) {
+		case GameState::RUNNING:
+			if (player.m_previous_heading == Heading::Left) return;
+			player.m_heading = Heading::Right;
+			break;
+		}
+		return;
+	}
+	else if (GetAsyncKeyState(0x57)) {
+		switch (state) {
+		case GameState::RUNNING:
+			if (player.m_previous_heading == Heading::Down) return;
+			player.m_heading = Heading::Top;
+			break;
+		}
+		return;
+	}
+	else if (GetAsyncKeyState(0x53)) {
+		switch (state) {
+		case GameState::RUNNING:
+			if (player.m_previous_heading == Heading::Top) return;
+			player.m_heading = Heading::Down;
+			break;
+		}return;
+	}
 }

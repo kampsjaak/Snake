@@ -16,16 +16,15 @@ void Interface::DrawGameOver(SnekManager* sm) {
 	return;
 };
 
-void Interface::DrawGameUI(SnekManager* sm) {
+void Interface::DrawGameUI(SnekManager* snake_manager) {
 	COORD a = {0, 0};
-	COORD b = {0, sm->height};
+	COORD b = {0, snake_manager->height};
 
-	for (short i = 0; i <= sm->width; i++) {
+	for (short i = 0; i <= snake_manager->width; i++) {
 		a.X = i;
 		b.X = i;
-		sm->GetDraw()->DrawCharacter('+', a);
-		sm->GetDraw()->DrawCharacter('+', b);
-
+		snake_manager->GetDraw()->DrawCharacter('+', a);
+		snake_manager->GetDraw()->DrawCharacter('+', b);
 	}
 	return;
 };
