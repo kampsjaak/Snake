@@ -17,18 +17,17 @@
 const unsigned int PROGRAM_UPDATE_STEP = 175; //ms
 const unsigned short LANGUAGE = 0;
 
-// drawing logic
 consoleSize cs = GetConsoleSize();
 unsigned short Draw::m_screen_colums = 20;
 unsigned short Draw::m_screen_rows = 20;
-Draw d;
+Draw draw;
 Player player;
 
-void HandleInputs(GameState state);
+void HandleGameplayInputs();
 
 int main()
 {
-	SnekManager snek_manager(&d);
+	SnekManager snek_manager(&draw);
 	player = Player(&snek_manager);
 	Game game(&snek_manager, &player, LANGUAGE);
 
@@ -38,7 +37,7 @@ int main()
 		switch(game.m_gameState)
 		{
 			case GameState::RUNNING:
-				HandleInputs(game.m_gameState);
+				HandleGameplayInputs();
 				game.Update();
 				std::this_thread::sleep_for(std::chrono::milliseconds(PROGRAM_UPDATE_STEP));
 				break;
@@ -57,40 +56,28 @@ int main()
 	return 0;
 }
 
-void HandleInputs(GameState state) {
+void HandleGameplayInputs() {
 	if (GetAsyncKeyState(0x41)) {
-		switch (state) {
-		case GameState::RUNNING:
-			if (player.m_previous_heading == Heading::Right) return;
-			player.m_heading = Heading::Left;
-			break;
-		}
+		if (player.m_previous_heading == Heading::Right) return;
+		player.m_heading = Heading::Left;
 		return;
 	}
 	else if (GetAsyncKeyState(0x44)) {
-		switch (state) {
-		case GameState::RUNNING:
-			if (player.m_previous_heading == Heading::Left) return;
-			player.m_heading = Heading::Right;
-			break;
-		}
+		if (player.m_previous_heading == Heading::Left) return;
+		
+		player.m_heading = Heading::Right;
 		return;
 	}
 	else if (GetAsyncKeyState(0x57)) {
-		switch (state) {
-		case GameState::RUNNING:
-			if (player.m_previous_heading == Heading::Down) return;
-			player.m_heading = Heading::Top;
-			break;
-		}
+		if (player.m_previous_heading == Heading::Down) return;
+		
+		player.m_heading = Heading::Top;
 		return;
 	}
 	else if (GetAsyncKeyState(0x53)) {
-		switch (state) {
-		case GameState::RUNNING:
-			if (player.m_previous_heading == Heading::Top) return;
-			player.m_heading = Heading::Down;
-			break;
-		}return;
+		if (player.m_previous_heading == Heading::Top) return;
+		
+		player.m_heading = Heading::Down;
+		return;
 	}
 }

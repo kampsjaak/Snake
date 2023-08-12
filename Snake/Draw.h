@@ -21,6 +21,8 @@
 #define YELLOW			14
 #define WHITE			15
 
+
+// For the screen and drawing things to the screen, no game logic
 class Draw {
 public:
 	Draw();
@@ -31,10 +33,6 @@ public:
 	unsigned const short m_hud_rows = 2;
 	
 	void DrawCharacter(char, COORD);
-	void DrawMainMenu();
-	void DrawGameOver();
-	void DrawGameUI(short, unsigned int, unsigned short, Localisation*);
-	void UpdateGameUIScore(int);
 
 	static unsigned short m_screen_colums;
 	static unsigned short m_screen_rows;

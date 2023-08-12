@@ -16,6 +16,12 @@
     <Filter Include="lua">
       <UniqueIdentifier>{0eaff2ac-d2ff-4bd3-8e5a-74b37b905289}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Draw">
+      <UniqueIdentifier>{062d1806-eb7e-4168-be26-ad4445a0b94b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UI">
+      <UniqueIdentifier>{3e1cbd98-e971-4506-901d-1c5e2d7bd55e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -27,16 +33,10 @@
     <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Draw.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SnekManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Pickup.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Interface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="lua\lapi.c">
@@ -138,8 +138,14 @@
     <ClCompile Include="lua\lzio.c">
       <Filter>lua</Filter>
     </ClCompile>
+    <ClCompile Include="Draw.cpp">
+      <Filter>Source Files\Draw</Filter>
+    </ClCompile>
+    <ClCompile Include="Interface.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
     <ClCompile Include="Localisation.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -149,13 +155,7 @@
     <ClInclude Include="Forward.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Draw.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="Game.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Interface.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Pickup.h">
@@ -257,18 +257,24 @@
     <ClInclude Include="lua\lzio.h">
       <Filter>lua</Filter>
     </ClInclude>
-    <ClInclude Include="Localisation.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="Draw.h">
+      <Filter>Source Files\Draw</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Language.lua">
-      <Filter>Source Files</Filter>
-    </None>
+    <ClInclude Include="Interface.h">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Localisation.h">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeLists.txt">
       <Filter>Source Files</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Language.lua">
+      <Filter>Source Files\UI</Filter>
+    </None>
   </ItemGroup>
 </Project>

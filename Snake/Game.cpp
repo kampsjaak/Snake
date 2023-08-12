@@ -52,11 +52,11 @@ Game::Game(SnekManager* sm, Player* player, unsigned short language) {
 	m_player = player;
 	m_localisation = Localisation(language);
 
-	for (unsigned short x = 0; x < m_snekManager->m_width; x++) {
-		for (unsigned short y = 0; y < m_snekManager->m_width; y++) {
-			//m_play_area.insert
-		}
-	}
+	//for (unsigned short x = 0; x < m_snekManager->m_width; x++) {
+	//	for (unsigned short y = 0; y < m_snekManager->m_width; y++) {
+	//		//m_play_area.insert
+	//	}
+	//}
 
 	for (unsigned short i = 0; i < m_snekManager->m_width * m_snekManager->m_height; i++) {
 		COORD c = { 
@@ -67,7 +67,7 @@ Game::Game(SnekManager* sm, Player* player, unsigned short language) {
 	}
 
 	// initialise gameplay systems
-	m_snekManager->GetDraw()->DrawGameUI(m_snekManager->m_width, Game::GetScore(), Game::GetLives(), GetLocalisation());
+	m_snekManager->GetInterface()->DrawGameUI(m_snekManager->GetDraw(), Game::GetScore(), Game::GetLives(), GetLocalisation());
 	m_player->Initialise({ { 0,5 }, { 1,5 }, { 2,5 } }, Heading::Right);
 	SpawnApple();
 
