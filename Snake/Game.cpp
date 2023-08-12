@@ -10,8 +10,8 @@
 
 COORD Game::RandomPosition() {
 	auto rng = static_cast<short>(rand());
-	return { static_cast<short>(rng % m_snekManager->width),
-		static_cast<short>(rng % m_snekManager->height)
+	return { static_cast<short>(rng % m_snekManager->m_width),
+		static_cast<short>(rng % m_snekManager->m_height)
 		};
 }
 
@@ -31,8 +31,8 @@ bool Game::PlayerOutOfBounds(Player* player) {
 	COORD* head = &player->m_snake.back();
 	if (	head->X < 0
 		||	head->Y < m_snekManager->GetDraw()->m_hud_rows
-		||	head->X > m_snekManager->width
-		||	head->Y > m_snekManager->height) {
+		||	head->X > m_snekManager->m_width
+		||	head->Y > m_snekManager->m_height) {
 		return true;
 	}
 	return false;
@@ -43,27 +43,31 @@ bool Game::PlayerTouchesSelf(Player* player) {
 	return false;
 };
 
-Game::Game(SnekManager* sm, Player* player, Localisation* localisation, unsigned short width, unsigned short height) {
+Game::Game(SnekManager* sm, Player* player, unsigned short language) {
 	// initialise dependencies
 	srand(static_cast<unsigned int>(time(0)));
 
 	// member variable assignment
 	m_snekManager = sm;
 	m_player = player;
-	m_width = width;
-	m_height = height;
-	m_localisation = localisation;
+	m_localisation = Localisation(language);
 
-	for (int i = 0; i < Game::m_width * Game::m_height; i++) {
+	for (unsigned short x = 0; x < m_snekManager->m_width; x++) {
+		for (unsigned short y = 0; y < m_snekManager->m_width; y++) {
+			//m_play_area.insert
+		}
+	}
+
+	for (unsigned short i = 0; i < m_snekManager->m_width * m_snekManager->m_height; i++) {
 		COORD c = { 
-			i / Game::m_width,
-			i % Game::m_width
+			i / m_snekManager->m_width,
+			i % m_snekManager->m_width
 		};
 		freeSlots.insert(freeSlots.begin() + i, m_player->IsAtPosition(c));
 	}
 
 	// initialise gameplay systems
-	m_snekManager->GetDraw()->DrawGameUI(Game::m_width, Game::GetScore(), Game::GetLives(), m_localisation);
+	m_snekManager->GetDraw()->DrawGameUI(m_snekManager->m_width, Game::GetScore(), Game::GetLives(), GetLocalisation());
 	m_player->Initialise({ { 0,5 }, { 1,5 }, { 2,5 } }, Heading::Right);
 	SpawnApple();
 

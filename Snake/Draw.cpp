@@ -3,10 +3,10 @@
 
 #include "Draw.h"
 
-Draw::Draw(uint32_t width, uint32_t height) {
+Draw::Draw() {
 	m_hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-	m_screen_colums = width;
-	m_screen_rows = height;
+	//uint32_t Draw::m_screen_colums = width;
+	//uint32_t Draw::m_screen_rows = height;
 };
 
 void Draw::DrawCharacter(const char character, COORD position) { 
@@ -26,7 +26,8 @@ void Draw::DrawGameOver() {
 	return;
 };
 
-void Draw::DrawGameUI(short width, unsigned int score, unsigned short lives, Localisation* localisation) {
+void Draw::DrawGameUI
+(short width, unsigned int score, unsigned short lives, Localisation* localisation) {
 	COORD line_0 = { 0, 0 };
 	COORD line_1 = { 0, 1 };
 

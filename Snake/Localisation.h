@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 
-enum LocalisedString {
+enum class LocalisedString : unsigned short {
 	SCORE = 0,
 	LIVES = 1,
 	QUIT = 2,
@@ -15,7 +15,7 @@ public:
 	std::string GetString(LocalisedString);
 	void ImportFromLUA();
 private:
-	std::string m_strings[LocalisedString::ENUM_LENGTH];
+	std::string m_strings[static_cast<unsigned short>(LocalisedString::ENUM_LENGTH)];
 	unsigned short m_language = 0;
 };
 

@@ -23,7 +23,9 @@
 
 class Draw {
 public:
-	Draw(uint32_t, uint32_t);
+	Draw();
+	static unsigned short Width() { return m_screen_colums; };
+	static unsigned short Height() { return m_screen_rows; };
 
 	unsigned const char m_char_snek = '@';
 	unsigned const short m_hud_rows = 2;
@@ -34,10 +36,10 @@ public:
 	void DrawGameUI(short, unsigned int, unsigned short, Localisation*);
 	void UpdateGameUIScore(int);
 
+	static unsigned short m_screen_colums;
+	static unsigned short m_screen_rows;
 private:
 	unsigned char m_print_char = ' ';
-	unsigned short m_screen_colums = 20;
-	unsigned short m_screen_rows = 20;
 	
 	HANDLE m_hConsole {};
 	COORD m_cursor_pos = { 0, 0 };

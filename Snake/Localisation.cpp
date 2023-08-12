@@ -9,7 +9,7 @@ Localisation::Localisation(unsigned short language) {
 };
 
 std::string Localisation::GetString(LocalisedString localised_string) {
-	return m_strings[localised_string];
+	return m_strings[static_cast<unsigned short>(localised_string)];
 };
 
 void Localisation::ImportFromLUA() {
@@ -24,7 +24,7 @@ void Localisation::ImportFromLUA() {
 		return;
 	}
 	
-	for (unsigned short i = 0; i < LocalisedString::ENUM_LENGTH; i++) {
+	for (unsigned short i = 0; i < static_cast<unsigned short>(LocalisedString::ENUM_LENGTH); i++) {
 		lua_getglobal(L, "GetLocalisedString");
 		
 		if (!lua_isfunction(L, -1)) {

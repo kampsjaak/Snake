@@ -1,7 +1,7 @@
 #include "SnekManager.h"
 
-SnekManager::SnekManager(Draw* d, const unsigned short w, const unsigned short h) {
+SnekManager::SnekManager(Draw* d) {
 	m_draw = d;
-	width = w;
-	height = h;
+	m_width = Draw::Width();
+	m_height = Draw::Height();
 };

@@ -15,24 +15,22 @@
 #include <lua.hpp>
 
 const unsigned int PROGRAM_UPDATE_STEP = 175; //ms
-const unsigned short WIDTH = 40;
-const unsigned short HEIGHT = 10;
 const unsigned short LANGUAGE = 0;
 
-Localisation localisation;
 // drawing logic
 consoleSize cs = GetConsoleSize();
-Draw d(cs.w, cs.h);
+unsigned short Draw::m_screen_colums = 20;
+unsigned short Draw::m_screen_rows = 20;
+Draw d;
+Player player;
 
 void HandleInputs(GameState state);
-Player player;
 
 int main()
 {
-	SnekManager snek_manager(&d, WIDTH, HEIGHT);
+	SnekManager snek_manager(&d);
 	player = Player(&snek_manager);
-	localisation = Localisation(LANGUAGE);
-	Game game(&snek_manager, &player, &localisation, WIDTH, HEIGHT);
+	Game game(&snek_manager, &player, LANGUAGE);
 
 	//Pickup::Initialise(&d);
 	while (!GetAsyncKeyState(VK_ESCAPE))
