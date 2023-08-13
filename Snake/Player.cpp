@@ -6,24 +6,24 @@
 #include "SnekManager.h"
 #include "Draw.h"
 
-void Player::DrawSelf() {
+void Snek::Player::DrawSelf() {
 	unsigned char snekChar = m_snek_manager->GetDraw()->m_char_snek;
-	Draw* draw = m_snek_manager->GetDraw();
+	SnekDraw::Draw* draw = m_snek_manager->GetDraw();
 	for (auto& coord : Player::m_snake) {
 		draw->DrawCharacter(draw->m_char_snek, coord);
 	}
 }
 
-bool Player::IsAtPosition(COORD point) {
+bool Snek::Player::IsAtPosition(COORD point) {
 	for (auto& coord : Player::m_snake) {
 		if (coord.X == point.X && coord.Y == point.Y) return true;
 	}
 	return false;
 }
 
-void Player::Redraw(bool grow) {
+void Snek::Player::Redraw(bool grow) {
 	// undraw the tail
-	Draw* draw = m_snek_manager->GetDraw();
+	SnekDraw::Draw* draw = m_snek_manager->GetDraw();
 	draw->DrawCharacter(' ', m_snake.front());
 
 	// snek eat apple
@@ -43,13 +43,13 @@ void Player::Redraw(bool grow) {
 	return;
 };
 
-void Player::Initialise(std::vector<COORD> snake, Heading h) {
+void Snek::Player::Initialise(std::vector<COORD> snake, Heading h) {
 	m_snake = snake;
 	m_heading = Heading::Right;
 	DrawSelf();
 }
 
-void Player::Move() {
+void Snek::Player::Move() {
 	m_previous_heading = m_heading;
 	switch (m_heading) {
 	case Heading::Left:
@@ -71,6 +71,6 @@ void Player::Move() {
 	}
 }
 
-Player::Player(SnekManager* snek_manager) {
+Snek::Player::Player(SnekManager* snek_manager) {
 	m_snek_manager = snek_manager;
 };

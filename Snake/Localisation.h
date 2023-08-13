@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 
+namespace Snek {
 enum class LocalisedString : unsigned short {
 	SCORE = 0,
 	LIVES = 1,
@@ -18,4 +19,4 @@ private:
 	std::string m_strings[static_cast<unsigned short>(LocalisedString::ENUM_LENGTH)];
 	unsigned short m_language = 0;
 };
-
+}

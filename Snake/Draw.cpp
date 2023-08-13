@@ -3,13 +3,13 @@
 
 #include "Draw.h"
 
-Draw::Draw() {
+SnekDraw::Draw::Draw(unsigned short width, unsigned short height) {
 	m_hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-	//uint32_t Draw::m_screen_colums = width;
-	//uint32_t Draw::m_screen_rows = height;
+	m_screen_colums = width;
+	m_screen_rows = height;
 };
 
-void Draw::DrawCharacter(const char character, COORD position) { 
+void SnekDraw::Draw::DrawCharacter(const char character, COORD position) {
 	m_print_char = character;
 	if (position.X < 0 || position.X > m_screen_colums) return;
 	if (position.Y < 0 || position.Y > m_screen_rows) return;

@@ -3,16 +3,16 @@
 #include "Localisation.h"
 #include "lua.hpp"
 
-Localisation::Localisation(unsigned short language) {
+Snek::Localisation::Localisation(unsigned short language) {
 	m_language = language;
 	ImportFromLUA();
 };
 
-std::string Localisation::GetString(LocalisedString localised_string) {
+std::string Snek::Localisation::GetString(LocalisedString localised_string) {
 	return m_strings[static_cast<unsigned short>(localised_string)];
 };
 
-void Localisation::ImportFromLUA() {
+void Snek::Localisation::ImportFromLUA() {
 	lua_State* L;
 	L = luaL_newstate();
 	luaL_openlibs(L);

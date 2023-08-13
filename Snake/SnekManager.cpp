@@ -1,15 +1,6 @@
 #include "SnekManager.h"
 
-SnekManager::SnekManager(Draw* d) {
+Snek::SnekManager::SnekManager(SnekDraw::Draw* d, UI* i) {
 	m_draw = d;
-
-	m_width = Draw::Width();
-	m_height = Draw::Height();
-	//m_interface = Interface();
-	//m_playarea_height = Draw::Height() - Interface::m_hud_height;
+	m_ui = i;
 };
-
-Interface* SnekManager::GetInterface() {
-	Interface* i = &m_interface;
-	return i;
-}

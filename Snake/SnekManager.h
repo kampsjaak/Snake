@@ -2,16 +2,17 @@
 #include <stdint.h>
 
 #include "Draw.h"
-#include "Interface.h"
+#include "UI.h"
 
+namespace Snek {
+// house all globals here
 class SnekManager {
 public:
-	SnekManager(Draw*);
-	Draw* GetDraw() { return m_draw; };
-	Interface* GetInterface();
-	short m_width = 0;
-	short m_height = 0;
+	SnekManager(SnekDraw::Draw*, UI*);
+	SnekDraw::Draw* GetDraw() { return m_draw; };
+	UI* GetUI() { return m_ui; };
 private:
-	Interface m_interface = Interface();
-	Draw* m_draw;
+	UI* m_ui;
+	SnekDraw::Draw* m_draw;
 };
+}

@@ -6,6 +6,7 @@
 #include "SnekManager.h"
 #include "Enums.h"
 
+namespace Snek {
 class Player {
 public:
 	Player() {};
@@ -25,3 +26,4 @@ public:
 private:
 	SnekManager* m_snek_manager = {};
 };
+}

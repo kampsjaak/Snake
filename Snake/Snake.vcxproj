@@ -144,7 +144,7 @@
   <ItemGroup>
     <ClCompile Include="Draw.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="Interface.cpp" />
+    <ClCompile Include="UI.cpp" />
     <ClCompile Include="Localisation.cpp" />
     <ClCompile Include="lua\lapi.c" />
     <ClCompile Include="lua\lauxlib.c" />
@@ -189,7 +189,7 @@
     <ClInclude Include="Enums.h" />
     <ClInclude Include="Forward.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="Interface.h" />
+    <ClInclude Include="UI.h" />
     <ClInclude Include="Localisation.h" />
     <ClInclude Include="lua\lapi.h" />
     <ClInclude Include="lua\lauxlib.h" />

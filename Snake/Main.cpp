@@ -10,6 +10,7 @@
 #include "Pickup.h"
 #include "util.h"
 #include "Draw.h"
+#include "UI.h"
 #include "Localisation.h"
 
 #include <lua.hpp>
@@ -18,18 +19,23 @@ const unsigned int PROGRAM_UPDATE_STEP = 175; //ms
 const unsigned short LANGUAGE = 0;
 
 consoleSize cs = GetConsoleSize();
-unsigned short Draw::m_screen_colums = 20;
-unsigned short Draw::m_screen_rows = 20;
-Draw draw;
-Player player;
 
 void HandleGameplayInputs();
+unsigned short Snek::UI::m_width = 20;
+unsigned short Snek::UI::m_height = 10;
+
+Snek::Player player;
+Snek::UI myUIinstance;
 
 int main()
 {
-	SnekManager snek_manager(&draw);
-	player = Player(&snek_manager);
-	Game game(&snek_manager, &player, LANGUAGE);
+	//myUIinstance = Snek::UI();
+	SnekDraw::Draw draw(20, 10);
+	//SnekDraw::Draw draw(Snek::UI::Width(), Snek::UI::Height());
+
+	Snek::SnekManager snek_manager(&draw, &myUIinstance);
+	player = Snek::Player(&snek_manager);
+	Snek::Game game(&snek_manager, &player, LANGUAGE);
 
 	//Pickup::Initialise(&d);
 	while (!GetAsyncKeyState(VK_ESCAPE))

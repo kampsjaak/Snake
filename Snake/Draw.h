@@ -2,8 +2,6 @@
 #include <windows.h>
 #include <stdint.h>
 
-#include "Localisation.h"
-
 #define BLACK			0
 #define BLUE			1
 #define GREEN			2
@@ -21,25 +19,24 @@
 #define YELLOW			14
 #define WHITE			15
 
-
+namespace SnekDraw {
 // For the screen and drawing things to the screen, no game logic
 class Draw {
 public:
-	Draw();
-	static unsigned short Width() { return m_screen_colums; };
-	static unsigned short Height() { return m_screen_rows; };
+	Draw(unsigned short, unsigned short);
 
 	unsigned const char m_char_snek = '@';
 	unsigned const short m_hud_rows = 2;
 	
 	void DrawCharacter(char, COORD);
-
-	static unsigned short m_screen_colums;
-	static unsigned short m_screen_rows;
 private:
 	unsigned char m_print_char = ' ';
 	
+	unsigned short m_screen_colums;
+	unsigned short m_screen_rows;
+
 	HANDLE m_hConsole {};
 	COORD m_cursor_pos = { 0, 0 };
 	COORD m_return_position = {0, 0};
 };
+}

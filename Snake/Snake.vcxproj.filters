@@ -141,7 +141,7 @@
     <ClCompile Include="Draw.cpp">
       <Filter>Source Files\Draw</Filter>
     </ClCompile>
-    <ClCompile Include="Interface.cpp">
+    <ClCompile Include="UI.cpp">
       <Filter>Source Files\UI</Filter>
     </ClCompile>
     <ClCompile Include="Localisation.cpp">
@@ -260,7 +260,7 @@
     <ClInclude Include="Draw.h">
       <Filter>Source Files\Draw</Filter>
     </ClInclude>
-    <ClInclude Include="Interface.h">
+    <ClInclude Include="UI.h">
       <Filter>Source Files\UI</Filter>
     </ClInclude>
     <ClInclude Include="Localisation.h">
