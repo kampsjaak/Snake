@@ -3,8 +3,7 @@
 #include "Localisation.h"
 #include "lua.hpp"
 
-Snek::Localisation::Localisation(unsigned short language) {
-	m_language = language;
+Snek::Localisation::Localisation() {
 	ImportFromLUA();
 };
 
@@ -33,7 +32,7 @@ void Snek::Localisation::ImportFromLUA() {
 		}
 
 		lua_pushnumber(L, i);
-		lua_pushnumber(L, m_language+1);
+		lua_pushnumber(L, CLI::LANGUAGE+1);
 
 		const int arguments_count = 2;
 		const int returnvalues_count = 1;

@@ -14,15 +14,15 @@ void Snek::UI::DrawGameUI(SnekDraw::Draw* draw, unsigned int score, unsigned sho
 		line_0.X = i;
 		line_1.X = i;
 		line_2.X = i;
-		draw->DrawCharacter('+', line_0);
-		draw->DrawCharacter('+', line_1);
-		draw->DrawCharacter('+', line_2);
+		draw->DrawCharacter(SnekDraw::GameCharacter::HORIZONTAL_BORDER, line_0);
+		draw->DrawCharacter(SnekDraw::GameCharacter::HORIZONTAL_BORDER, line_1);
+		draw->DrawCharacter(SnekDraw::GameCharacter::HORIZONTAL_BORDER, line_2);
 	}
 	for (short i = 2; i <= Height() - 1; i++) {
 		line_3.Y = i;
 		line_4.Y = i;
-		draw->DrawCharacter('~', line_3);
-		draw->DrawCharacter('~', line_4);
+		draw->DrawCharacter(SnekDraw::GameCharacter::VERTICAL_BORDER, line_3);
+		draw->DrawCharacter(SnekDraw::GameCharacter::VERTICAL_BORDER, line_4);
 	}
 
 	const std::string scoreboard_line_0 = localisation->GetString(Snek::LocalisedString::SCORE) + ": ";

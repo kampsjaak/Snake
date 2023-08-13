@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
 
+#include "CLI.h"
+
 namespace Snek {
 enum class LocalisedString : unsigned short {
 	SCORE = 0,
@@ -11,12 +13,10 @@ enum class LocalisedString : unsigned short {
 
 class Localisation {
 public:
-	Localisation() {};
-	Localisation(unsigned short);
+	Localisation();
 	std::string GetString(LocalisedString);
 	void ImportFromLUA();
 private:
 	std::string m_strings[static_cast<unsigned short>(LocalisedString::ENUM_LENGTH)];
-	unsigned short m_language = 0;
 };
 }

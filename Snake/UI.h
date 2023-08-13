@@ -17,9 +17,7 @@ public:
     const unsigned short m_min_width = 12;
     const unsigned short m_hud_height = 2;
 
-    static unsigned short Width() { return m_width; };
-    static unsigned short Height() { return m_height; };
-    static unsigned short m_width;
-    static unsigned short m_height;
+    static unsigned short Width() { return CLI::WIDTH; };
+    static unsigned short Height() { return CLI::HEIGHT; };
 };
 }

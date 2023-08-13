@@ -22,6 +22,12 @@
     <Filter Include="Source Files\UI">
       <UniqueIdentifier>{3e1cbd98-e971-4506-901d-1c5e2d7bd55e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="lyra">
+      <UniqueIdentifier>{5df252ac-0643-479f-a058-3b43b5bccc63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lyra\detail">
+      <UniqueIdentifier>{dcf4480d-d691-4448-ad09-c2fdb26fd22f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -147,12 +153,15 @@
     <ClCompile Include="Localisation.cpp">
       <Filter>Source Files\UI</Filter>
     </ClCompile>
+    <ClCompile Include="CLI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawConsole.cpp">
+      <Filter>Source Files\Draw</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="util.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Forward.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
@@ -266,9 +275,105 @@
     <ClInclude Include="Localisation.h">
       <Filter>Source Files\UI</Filter>
     </ClInclude>
+    <ClInclude Include="CLI.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lyra\detail\bound.hpp">
+      <Filter>lyra\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="lyra\detail\choices.hpp">
+      <Filter>lyra\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="lyra\detail\deprecated_parser_customization.hpp">
+      <Filter>lyra\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="lyra\detail\from_string.hpp">
+      <Filter>lyra\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="lyra\detail\invoke_lambda.hpp">
+      <Filter>lyra\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="lyra\detail\parse.hpp">
+      <Filter>lyra\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="lyra\detail\print.hpp">
+      <Filter>lyra\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="lyra\detail\result.hpp">
+      <Filter>lyra\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="lyra\detail\tokens.hpp">
+      <Filter>lyra\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="lyra\detail\trait_utils.hpp">
+      <Filter>lyra\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="lyra\detail\unary_lambda_traits.hpp">
+      <Filter>lyra\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="lyra\arg.hpp">
+      <Filter>lyra</Filter>
+    </ClInclude>
+    <ClInclude Include="lyra\args.hpp">
+      <Filter>lyra</Filter>
+    </ClInclude>
+    <ClInclude Include="lyra\arguments.hpp">
+      <Filter>lyra</Filter>
+    </ClInclude>
+    <ClInclude Include="lyra\cli.hpp">
+      <Filter>lyra</Filter>
+    </ClInclude>
+    <ClInclude Include="lyra\cli_parser.hpp">
+      <Filter>lyra</Filter>
+    </ClInclude>
+    <ClInclude Include="lyra\command.hpp">
+      <Filter>lyra</Filter>
+    </ClInclude>
+    <ClInclude Include="lyra\exe_name.hpp">
+      <Filter>lyra</Filter>
+    </ClInclude>
+    <ClInclude Include="lyra\group.hpp">
+      <Filter>lyra</Filter>
+    </ClInclude>
+    <ClInclude Include="lyra\help.hpp">
+      <Filter>lyra</Filter>
+    </ClInclude>
+    <ClInclude Include="lyra\literal.hpp">
+      <Filter>lyra</Filter>
+    </ClInclude>
+    <ClInclude Include="lyra\lyra.hpp">
+      <Filter>lyra</Filter>
+    </ClInclude>
+    <ClInclude Include="lyra\main.hpp">
+      <Filter>lyra</Filter>
+    </ClInclude>
+    <ClInclude Include="lyra\opt.hpp">
+      <Filter>lyra</Filter>
+    </ClInclude>
+    <ClInclude Include="lyra\option_style.hpp">
+      <Filter>lyra</Filter>
+    </ClInclude>
+    <ClInclude Include="lyra\parser.hpp">
+      <Filter>lyra</Filter>
+    </ClInclude>
+    <ClInclude Include="lyra\parser_result.hpp">
+      <Filter>lyra</Filter>
+    </ClInclude>
+    <ClInclude Include="lyra\val.hpp">
+      <Filter>lyra</Filter>
+    </ClInclude>
+    <ClInclude Include="lyra\version.hpp">
+      <Filter>lyra</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawConsole.h">
+      <Filter>Source Files\Draw</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeLists.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+    <Text Include="LICENSE.txt">
       <Filter>Source Files</Filter>
     </Text>
   </ItemGroup>

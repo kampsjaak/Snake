@@ -4,9 +4,15 @@
 #include <string>
 
 #include "SnekManager.h"
-#include "Enums.h"
 
 namespace Snek {
+enum class Heading : unsigned short {
+	Top,
+	Down,
+	Left,
+	Right
+};
+
 class Player {
 public:
 	Player() {};

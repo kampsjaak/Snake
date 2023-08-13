@@ -1,13 +1,12 @@
 #include <iostream>
 #include <windows.h > // input https://visualstudioclient.gallerycdn.vsassets.io/extensions/visualstudioclient/microsoftvisualstudio2017installerprojects/1.0.0/1620063166533/InstallerProjects.vsix
-#include <ctime>
+#include <ctime> // random nummer generation
 #include <vector>
 
 #include "Game.h"
 #include "SnekManager.h"
 #include "Draw.h"
 #include "Player.h"
-
 
 COORD Snek::Game::RandomPosition() {
 	auto rng = static_cast<short>(rand());
@@ -18,7 +17,7 @@ COORD Snek::Game::RandomPosition() {
 
 void Snek::Game::SpawnApple(COORD* apple, COORD pos) {
 	apple = &pos;
-	m_snekManager->GetDraw()->DrawCharacter('o', *apple);
+	m_snekManager->GetDraw()->DrawCharacter(SnekDraw::GameCharacter::APPLE, *apple);
 	return;
 }
 
@@ -44,14 +43,14 @@ bool Snek::Game::PlayerTouchesSelf(Player* player) {
 	return false;
 };
 
-Snek::Game::Game(SnekManager* sm, Player* player, unsigned short language) {
+Snek::Game::Game(SnekManager* sm, Player* player) {
 	// initialise dependencies
 	srand(static_cast<unsigned int>(time(0)));
 
 	// member variable assignment
 	m_snekManager = sm;
 	m_player = player;
-	m_localisation = Localisation(language);
+	m_localisation = Localisation();
 
 	//for (unsigned short x = 0; x < m_snekManager->m_width; x++) {
 	//	for (unsigned short y = 0; y < m_snekManager->m_width; y++) {

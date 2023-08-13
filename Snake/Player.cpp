@@ -10,7 +10,7 @@ void Snek::Player::DrawSelf() {
 	unsigned char snekChar = m_snek_manager->GetDraw()->m_char_snek;
 	SnekDraw::Draw* draw = m_snek_manager->GetDraw();
 	for (auto& coord : Player::m_snake) {
-		draw->DrawCharacter(draw->m_char_snek, coord);
+		draw->DrawCharacter(SnekDraw::GameCharacter::SNAKE, coord);
 	}
 }
 
@@ -24,7 +24,7 @@ bool Snek::Player::IsAtPosition(COORD point) {
 void Snek::Player::Redraw(bool grow) {
 	// undraw the tail
 	SnekDraw::Draw* draw = m_snek_manager->GetDraw();
-	draw->DrawCharacter(' ', m_snake.front());
+	draw->DrawCharacter(SnekDraw::GameCharacter::EMPTY, m_snake.front());
 
 	// snek eat apple
 	if(grow) {
@@ -39,7 +39,7 @@ void Snek::Player::Redraw(bool grow) {
 		m_snake.back() = m_head;
 	}
 
-	draw->DrawCharacter(draw->m_char_snek, m_snake.back());
+	draw->DrawCharacter(SnekDraw::GameCharacter::SNAKE, m_snake.back());
 	return;
 };
 

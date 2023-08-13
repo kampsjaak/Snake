@@ -18,7 +18,7 @@ namespace Snek {
 	class Game {
 	public:
 		Game() {};
-		Game(SnekManager*, Player*, unsigned short);
+		Game(SnekManager*, Player*);
 
 		void Update();
 		void SpawnApple();

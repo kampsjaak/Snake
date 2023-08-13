@@ -142,7 +142,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CLI.cpp" />
     <ClCompile Include="Draw.cpp" />
+    <ClCompile Include="DrawConsole.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="Localisation.cpp" />
@@ -185,10 +187,40 @@
     <ClCompile Include="SnekManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CLI.h" />
     <ClInclude Include="Draw.h" />
     <ClInclude Include="Enums.h" />
-    <ClInclude Include="Forward.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="DrawConsole.h" />
+    <ClInclude Include="lyra\arg.hpp" />
+    <ClInclude Include="lyra\args.hpp" />
+    <ClInclude Include="lyra\arguments.hpp" />
+    <ClInclude Include="lyra\cli.hpp" />
+    <ClInclude Include="lyra\cli_parser.hpp" />
+    <ClInclude Include="lyra\command.hpp" />
+    <ClInclude Include="lyra\detail\bound.hpp" />
+    <ClInclude Include="lyra\detail\choices.hpp" />
+    <ClInclude Include="lyra\detail\deprecated_parser_customization.hpp" />
+    <ClInclude Include="lyra\detail\from_string.hpp" />
+    <ClInclude Include="lyra\detail\invoke_lambda.hpp" />
+    <ClInclude Include="lyra\detail\parse.hpp" />
+    <ClInclude Include="lyra\detail\print.hpp" />
+    <ClInclude Include="lyra\detail\result.hpp" />
+    <ClInclude Include="lyra\detail\tokens.hpp" />
+    <ClInclude Include="lyra\detail\trait_utils.hpp" />
+    <ClInclude Include="lyra\detail\unary_lambda_traits.hpp" />
+    <ClInclude Include="lyra\exe_name.hpp" />
+    <ClInclude Include="lyra\group.hpp" />
+    <ClInclude Include="lyra\help.hpp" />
+    <ClInclude Include="lyra\literal.hpp" />
+    <ClInclude Include="lyra\lyra.hpp" />
+    <ClInclude Include="lyra\main.hpp" />
+    <ClInclude Include="lyra\opt.hpp" />
+    <ClInclude Include="lyra\option_style.hpp" />
+    <ClInclude Include="lyra\parser.hpp" />
+    <ClInclude Include="lyra\parser_result.hpp" />
+    <ClInclude Include="lyra\val.hpp" />
+    <ClInclude Include="lyra\version.hpp" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="Localisation.h" />
     <ClInclude Include="lua\lapi.h" />
@@ -230,6 +262,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeLists.txt" />
+    <Text Include="LICENSE.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
