@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "Enums.h"
 #include "Localisation.h"
+#include "InputPlayer.h"
 
 namespace Snek {
 	struct PlaySpace {
@@ -38,6 +39,7 @@ namespace Snek {
 		Player* m_player{};
 	private:
 		Localisation m_localisation;
+		InputPlayer m_input_player;
 		bool PlayerOutOfBounds(Player*);
 		bool PlayerTouchesSelf(Player*);
 

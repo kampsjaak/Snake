@@ -27,28 +27,29 @@ SnekDraw::DrawConsole::DrawConsole(unsigned short width, unsigned short height) 
 };
 
 void SnekDraw::DrawConsole::DrawCharacter(GameCharacter character, COORD position) {
-	switch (character) {
-	case GameCharacter::EMPTY:
-		m_print_char = ' ';
-		break;
-	case GameCharacter::SNAKE:
-		m_print_char = '@';
-		break;
-	case GameCharacter::APPLE:
-		m_print_char = 'o';
-		break;
-	case GameCharacter::HORIZONTAL_BORDER:
-		m_print_char = '+';
-		break;
-	case GameCharacter::VERTICAL_BORDER:
-		m_print_char = '~';
-		break;
-	default:
-		m_print_char = '?';
-		break;
-	}
 	if (position.X < 0 || position.X > m_screen_colums) return;
 	if (position.Y < 0 || position.Y > m_screen_rows) return;
+
+	switch (character) {
+		case GameCharacter::EMPTY:
+			m_print_char = ' ';
+			break;
+		case GameCharacter::SNAKE:
+			m_print_char = '@';
+			break;
+		case GameCharacter::APPLE:
+			m_print_char = 'o';
+			break;
+		case GameCharacter::HORIZONTAL_BORDER:
+			m_print_char = '+';
+			break;
+		case GameCharacter::VERTICAL_BORDER:
+			m_print_char = '~';
+			break;
+		default:
+			m_print_char = '?';
+			break;
+	}	
 	SetConsoleCursorPosition(m_hConsole, position);
 	WriteConsole(m_hConsole, &m_print_char, 1, NULL, NULL);
 	SetConsoleCursorPosition(m_hConsole, m_return_position);

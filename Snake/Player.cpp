@@ -7,7 +7,6 @@
 #include "Draw.h"
 
 void Snek::Player::DrawSelf() {
-	unsigned char snekChar = m_snek_manager->GetDraw()->m_char_snek;
 	SnekDraw::Draw* draw = m_snek_manager->GetDraw();
 	for (auto& coord : Player::m_snake) {
 		draw->DrawCharacter(SnekDraw::GameCharacter::SNAKE, coord);

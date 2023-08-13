@@ -159,6 +159,9 @@
     <ClCompile Include="DrawConsole.cpp">
       <Filter>Source Files\Draw</Filter>
     </ClCompile>
+    <ClCompile Include="InputPlayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="util.h">
@@ -367,6 +370,9 @@
     </ClInclude>
     <ClInclude Include="DrawConsole.h">
       <Filter>Source Files\Draw</Filter>
+    </ClInclude>
+    <ClInclude Include="InputPlayer.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

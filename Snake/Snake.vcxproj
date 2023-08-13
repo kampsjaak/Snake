@@ -146,6 +146,7 @@
     <ClCompile Include="Draw.cpp" />
     <ClCompile Include="DrawConsole.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="InputPlayer.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="Localisation.cpp" />
     <ClCompile Include="lua\lapi.c" />
@@ -192,6 +193,7 @@
     <ClInclude Include="Enums.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="DrawConsole.h" />
+    <ClInclude Include="InputPlayer.h" />
     <ClInclude Include="lyra\arg.hpp" />
     <ClInclude Include="lyra\args.hpp" />
     <ClInclude Include="lyra\arguments.hpp" />

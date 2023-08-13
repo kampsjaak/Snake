@@ -50,6 +50,7 @@ Snek::Game::Game(SnekManager* sm, Player* player) {
 	// member variable assignment
 	m_snekManager = sm;
 	m_player = player;
+	m_input_player = InputPlayer(m_player);
 	m_localisation = Localisation();
 
 	//for (unsigned short x = 0; x < m_snekManager->m_width; x++) {
@@ -75,6 +76,7 @@ Snek::Game::Game(SnekManager* sm, Player* player) {
 };
 
 void Snek::Game::Update() {
+	m_input_player.Update();
 	m_player->Move();
 	if(m_player->m_head.X == m_apples[0].X && m_player->m_head.Y == m_apples[0].Y) {
 		m_player->Redraw(true);
