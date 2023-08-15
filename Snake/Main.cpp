@@ -4,7 +4,6 @@
 
 #include "SnekManager.h"
 #include "Game.h"
-#include "Player.h"
 #include "DrawConsole.h"
 #include "UI.h"
 #include "CLI.h"
@@ -19,29 +18,27 @@ unsigned short Snek::CLI::LANGUAGE = 0;
 
 int main(int argc, const char** argv)
 {
-	Snek::CLI cli(argc, argv);
+	Snek::CLI cli(argc, argv); 
 
 	Snek::UI ui;
 	SnekDraw::DrawConsole draw(Snek::CLI::WIDTH, Snek::CLI::HEIGHT);
 	Snek::SnekManager snek_manager(&draw, &ui);
-	player = Snek::Player(&snek_manager);
-	Snek::Game game(&snek_manager, &player);
 
-	//Pickup::Initialise(&d);
+	auto game = snek_manager.GetGame();
 	while (!GetAsyncKeyState(VK_ESCAPE))
 	{
-		switch(game.m_gameState)
+		switch(game->m_gameState)
 		{
-			case GameState::RUNNING:
-				game.Update();
+		case Snek::GameState::RUNNING:
+				game->Update();
 				std::this_thread::sleep_for(std::chrono::milliseconds(PROGRAM_UPDATE_STEP));
 				break;
-			case GameState::GAME_OVER:
+			case Snek::GameState::GAME_OVER:
 				system("cls");
 				std::cout << "sry bro snek ded";
 				std::this_thread::sleep_for(std::chrono::milliseconds(PROGRAM_UPDATE_STEP));
 				break;
-			case GameState::MENU:
+			case Snek::GameState::MENU:
 				break;
 			default:
 				break;

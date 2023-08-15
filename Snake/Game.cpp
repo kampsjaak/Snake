@@ -43,7 +43,7 @@ bool Snek::Game::PlayerTouchesSelf(Player* player) {
 	return false;
 };
 
-Snek::Game::Game(SnekManager* sm, Player* player) {
+void Snek::Game::Initialize(SnekManager* sm, Player* player) {
 	// initialise dependencies
 	srand(static_cast<unsigned int>(time(0)));
 
@@ -52,15 +52,13 @@ Snek::Game::Game(SnekManager* sm, Player* player) {
 	m_player = player;
 	m_input_player = InputPlayer(m_player);
 	m_localisation = Localisation();
-
-	//for (unsigned short x = 0; x < m_snekManager->m_width; x++) {
-	//	for (unsigned short y = 0; y < m_snekManager->m_width; y++) {
-	//		//m_play_area.insert
-	//	}
-	//}
+	m_play_area = PlayArea(m_snekManager->GetUI()->Height(),
+		3,
+		2,
+		m_snekManager->GetUI()->Width());
 
 	for (unsigned short i = 0; i < m_snekManager->GetUI()->Width() * m_snekManager->GetUI()->Height(); i++) {
-		COORD c = { 
+		COORD c = {
 			i / m_snekManager->GetUI()->Width(),
 			i % m_snekManager->GetUI()->Width()
 		};
@@ -71,22 +69,27 @@ Snek::Game::Game(SnekManager* sm, Player* player) {
 	m_snekManager->GetUI()->DrawGameUI(m_snekManager->GetDraw(), Game::GetScore(), Game::GetLives(), GetLocalisation());
 	m_player->Initialise({ { 0,5 }, { 1,5 }, { 2,5 } }, Heading::Right);
 	SpawnApple();
+}
 
-	return;
-};
+void Snek::Game::CheckCollisions() {
+	if (m_player->m_head.X == m_apples[0].X && m_player->m_head.Y == m_apples[0].Y) {
+		m_player->Redraw(true);
+		SpawnApple();
+	}
+	else {
+		m_player->Redraw(false);
+	}
+}
 
 void Snek::Game::Update() {
 	m_input_player.Update();
-	m_player->Move();
-	if(m_player->m_head.X == m_apples[0].X && m_player->m_head.Y == m_apples[0].Y) {
-		m_player->Redraw(true);
-		SpawnApple();
-	} else {
-		m_player->Redraw(false);
-	}
+	m_player->Move([&]() {
+		//m_play_area.MoveSnek(m_player->m_head, m_player->m_snake[0]);
+		});
+	CheckCollisions();
+
 	if (PlayerOutOfBounds(m_player)) { 
 		m_gameState = GameState::GAME_OVER;
 		return; 
 	};
-	return;
 }

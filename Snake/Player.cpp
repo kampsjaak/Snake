@@ -48,7 +48,7 @@ void Snek::Player::Initialise(std::vector<COORD> snake, Heading h) {
 	DrawSelf();
 }
 
-void Snek::Player::Move() {
+void Snek::Player::Move(std::function<void()> Callback) {
 	m_previous_heading = m_heading;
 	switch (m_heading) {
 	case Heading::Left:
@@ -68,8 +68,9 @@ void Snek::Player::Move() {
 		m_head.Y = m_snake.back().Y + 1;
 		break;
 	}
+	Callback();
 }
 
-Snek::Player::Player(SnekManager* snek_manager) {
+void Snek::Player::SetSnekManager(SnekManager* snek_manager) {
 	m_snek_manager = snek_manager;
 };

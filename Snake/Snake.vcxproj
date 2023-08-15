@@ -147,6 +147,7 @@
     <ClCompile Include="DrawConsole.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="InputPlayer.cpp" />
+    <ClCompile Include="PlayArea.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="Localisation.cpp" />
     <ClCompile Include="lua\lapi.c" />
@@ -182,7 +183,6 @@
     <ClCompile Include="lua\lutf8lib.c" />
     <ClCompile Include="lua\lvm.c" />
     <ClCompile Include="lua\lzio.c" />
-    <ClCompile Include="Pickup.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="SnekManager.cpp" />
@@ -223,6 +223,7 @@
     <ClInclude Include="lyra\parser_result.hpp" />
     <ClInclude Include="lyra\val.hpp" />
     <ClInclude Include="lyra\version.hpp" />
+    <ClInclude Include="PlayArea.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="Localisation.h" />
     <ClInclude Include="lua\lapi.h" />
@@ -254,7 +255,6 @@
     <ClInclude Include="lua\lundump.h" />
     <ClInclude Include="lua\lvm.h" />
     <ClInclude Include="lua\lzio.h" />
-    <ClInclude Include="Pickup.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="SnekManager.h" />
     <ClInclude Include="util.h" />

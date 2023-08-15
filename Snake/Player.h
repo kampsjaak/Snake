@@ -2,10 +2,11 @@
 #include <windows.h>
 #include <vector>
 #include <string>
-
-#include "SnekManager.h"
+#include <functional>
 
 namespace Snek {
+	class SnekManager;
+
 enum class Heading : unsigned short {
 	Top,
 	Down,
@@ -16,10 +17,10 @@ enum class Heading : unsigned short {
 class Player {
 public:
 	Player() {};
-	Player(SnekManager*);
 
+	void SetSnekManager(SnekManager*);
 	void Initialise(std::vector<COORD>, Heading);
-	void Move();
+	void Move(std::function<void()>);
 	void DrawSelf();
 	void Redraw(bool);
 	bool IsAtPosition(COORD);

@@ -2,48 +2,46 @@
 #include <windows.h>
 #include <vector>
 
-#include "SnekManager.h"
+
 #include "Player.h"
 #include "Enums.h"
 #include "Localisation.h"
 #include "InputPlayer.h"
+#include "PlayArea.h"
 
 namespace Snek {
-	struct PlaySpace {
-		short x;
-		short y;
-		bool snake;
-		bool apple;
-	};
+class SnekManager;
 
 	class Game {
 	public:
 		Game() {};
-		Game(SnekManager*, Player*);
 
+		void Initialize(SnekManager*, Player*);
 		void Update();
 		void SpawnApple();
 		void SpawnApple(COORD*, COORD);
 		COORD RandomPosition();
 
-		std::vector<bool> freeSlots;
-		unsigned int GetScore() { return m_score; }
-		unsigned short GetLives() { return m_lives; }
+		PlayArea m_play_area;
+		PlayArea* GetPlayArea() { return &m_play_area; };
+		Localisation* GetLocalisation() { return &m_localisation; };
+		unsigned int GetScore() { return m_score; };
+		unsigned short GetLives() { return m_lives; };
 
 		GameState m_gameState = GameState::RUNNING;
-		Localisation* GetLocalisation() { return &m_localisation; };
-		std::vector<PlaySpace>* GetPlayArea() { return &m_play_area; }
 		std::vector<COORD> m_apples = { { 0, 1 }, { 0, 2 }, { 0, 3 }, { 0, 4 }, { 0, 5 } };
+		std::vector<bool> freeSlots;
 
 		SnekManager* m_snekManager{};
 		Player* m_player{};
 	private:
 		Localisation m_localisation;
 		InputPlayer m_input_player;
+		
 		bool PlayerOutOfBounds(Player*);
 		bool PlayerTouchesSelf(Player*);
+		void CheckCollisions();
 
-		std::vector<PlaySpace> m_play_area;
 		unsigned int m_score = 0;
 		unsigned short m_lives = 3;
 	};

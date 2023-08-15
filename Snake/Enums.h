@@ -1,7 +1,9 @@
 #pragma once
 
-enum class GameState : unsigned short { 
+namespace Snek {
+enum class GameState : unsigned short {
 	MENU,
 	RUNNING,
 	GAME_OVER
 };
+}
