@@ -17,7 +17,9 @@ public:
 	Draw() {};
 	Draw(unsigned short, unsigned short);
 
-	unsigned const short m_hud_rows = 2;
+	unsigned const short m_hud_top_rows = 2;
+	unsigned const short m_hud_bottom_rows = 2;
+	unsigned const short m_border_columns = 2;
 	
 	virtual void DrawCharacter(GameCharacter, COORD);
 private:

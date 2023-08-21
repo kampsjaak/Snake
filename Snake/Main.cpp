@@ -27,7 +27,7 @@ int main(int argc, const char** argv)
 	auto game = snek_manager.GetGame();
 	while (!GetAsyncKeyState(VK_ESCAPE))
 	{
-		switch(game->m_gameState)
+		switch(game->m_game_state)
 		{
 		case Snek::GameState::RUNNING:
 				game->Update();

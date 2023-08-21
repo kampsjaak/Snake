@@ -16,7 +16,8 @@ COORD Snek::Game::RandomPosition() {
 }
 
 void Snek::Game::SpawnApple(COORD* apple, COORD pos) {
-	apple = &pos;
+	apple->X = pos.X;
+	apple->Y = pos.Y;
 	m_snekManager->GetDraw()->DrawCharacter(SnekDraw::GameCharacter::APPLE, *apple);
 	return;
 }
@@ -27,21 +28,27 @@ void Snek::Game::SpawnApple() {
 	SpawnApple(&m_apples[0], RandomPosition());
 }
 
-bool Snek::Game::PlayerOutOfBounds(Player* player) {
-	COORD* head = &player->m_snake.back();
-	if (	head->X < 0
-		||	head->Y < m_snekManager->GetDraw()->m_hud_rows
-		||	head->X > m_snekManager->GetUI()->Width()
-		||	head->Y > m_snekManager->GetUI()->Height()) {
-		return true;
+void Snek::Game::SpawnApples() {
+	for(auto i = 0; i < m_apple_spawn_count; i++) {
+		m_snekManager->GetDraw()->DrawCharacter(SnekDraw::GameCharacter::APPLE, m_apples[i]);
 	}
-	return false;
 }
 
-bool Snek::Game::PlayerTouchesSelf(Player* player) {
-	if (player->IsAtPosition(player->m_snake.back())) return true;
-	return false;
-};
+//bool Snek::Game::PlayerOutOfBounds(Player* player) {
+//	COORD* head = &player->m_snake.back();
+//	if (	head->X < 0
+//		||	head->Y < m_snekManager->GetUI()->m_hud_bottom_rows
+//		||	head->X > m_snekManager->GetUI()->Width()
+//		||	head->Y > m_snekManager->GetUI()->Height()) {
+//		return true;
+//	}
+//	return false;
+//}
+//
+//bool Snek::Game::PlayerTouchesSelf(Player* player) {
+//	if (player->IsAtPosition(player->m_snake.back())) return true;
+//	return false;
+//};
 
 void Snek::Game::Initialize(SnekManager* sm, Player* player) {
 	// initialise dependencies
@@ -52,44 +59,46 @@ void Snek::Game::Initialize(SnekManager* sm, Player* player) {
 	m_player = player;
 	m_input_player = InputPlayer(m_player);
 	m_localisation = Localisation();
-	m_play_area = PlayArea(m_snekManager->GetUI()->Height(),
-		3,
-		2,
-		m_snekManager->GetUI()->Width());
-
-	for (unsigned short i = 0; i < m_snekManager->GetUI()->Width() * m_snekManager->GetUI()->Height(); i++) {
-		COORD c = {
-			i / m_snekManager->GetUI()->Width(),
-			i % m_snekManager->GetUI()->Width()
-		};
-		freeSlots.insert(freeSlots.begin() + i, m_player->IsAtPosition(c));
-	}
+	m_play_area = PlayArea(
+		m_snekManager->GetUI()->Height() - m_snekManager->GetUI()->m_hud_top_rows,
+		m_snekManager->GetUI()->m_border_column,
+		m_snekManager->GetUI()->m_hud_bottom_rows,
+		m_snekManager->GetUI()->Width() - (2 * m_snekManager->GetUI()->m_border_column));
 
 	// initialise gameplay systems
 	m_snekManager->GetUI()->DrawGameUI(m_snekManager->GetDraw(), Game::GetScore(), Game::GetLives(), GetLocalisation());
-	m_player->Initialise({ { 0,5 }, { 1,5 }, { 2,5 } }, Heading::Right);
+	m_player->Initialise(&m_play_area, { { 1,5 }, { 2,5 }, { 3,5 } }, Heading::Right);
+	// FIXME:	Add snek to play area
+	m_apples = m_play_area.GetRandomFreePositions(m_apple_spawn_count);
 	SpawnApple();
 }
 
 void Snek::Game::CheckCollisions() {
-	if (m_player->m_head.X == m_apples[0].X && m_player->m_head.Y == m_apples[0].Y) {
-		m_player->Redraw(true);
-		SpawnApple();
+	bool redraw = false;
+	for (auto& apple : m_apples) {
+		if (m_player->m_head.X == apple.X && m_player->m_head.Y == apple.Y) {
+			redraw = true;
+			m_player->Redraw(true);
+			// NOTE:	Fix specific apple respawning
+			//SpawnApple(); 
+		}
 	}
-	else {
-		m_player->Redraw(false);
-	}
+	
+	m_player->Redraw(redraw);
 }
 
 void Snek::Game::Update() {
 	m_input_player.Update();
-	m_player->Move([&]() {
-		//m_play_area.MoveSnek(m_player->m_head, m_player->m_snake[0]);
+	m_player->Move([this](COORD head, COORD tail) {
+		auto move_response = m_play_area.GrowSnek(head);
+		switch (move_response) {
+			case MoveResponse::OUT_OF_BOUNDS:
+			case MoveResponse::TOUCH:
+				m_game_state = GameState::GAME_OVER;
+				return;
+			default:
+				break;
+			}
 		});
 	CheckCollisions();
-
-	if (PlayerOutOfBounds(m_player)) { 
-		m_gameState = GameState::GAME_OVER;
-		return; 
-	};
 }
