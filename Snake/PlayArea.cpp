@@ -3,6 +3,7 @@
 #include <random>
 
 #include "PlayArea.h"
+#include "UI.h"
 
 Snek::PlayArea::PlayArea(unsigned short top, unsigned short left, unsigned short bottom, unsigned short right) {
 	m_max_y = top;
@@ -16,8 +17,8 @@ Snek::PlayArea::PlayArea(unsigned short top, unsigned short left, unsigned short
 	m_free_cells.resize(vector_size);
 
 	for (auto i = 0; i < vector_size; i++) {
-		m_free_cells[i].X = m_min_x + i % columns;
-		m_free_cells[i].Y = m_min_y + floor(i / columns);
+		m_free_cells[i].X = m_min_x + i % columns + UI::m_border_column;
+		m_free_cells[i].Y = m_min_y + floor(i / columns) + UI::m_hud_top_rows;
 	}
 };
 
@@ -43,30 +44,40 @@ void Snek::PlayArea::MoveSnek(COORD head, COORD tail) {
 	m_snake_cells[new_head_index] = head;
 };
 
-Snek::MoveResponse Snek::PlayArea::GrowSnek(COORD head) {
+Snek::MoveState Snek::PlayArea::CheckCollisions(const COORD head, const COORD tail) {
 	short new_head_index = -1;
+
+	// is new head a freecell?
 	for (auto i = 0; i < m_free_cells.size(); i++) {
 		if (m_free_cells[i].X == head.X && m_free_cells[i].Y == head.Y) {
 			new_head_index = i;
 			break;
 		}
 	}
+		
 	if (new_head_index > -1) {
-		m_free_cells.erase(m_free_cells.begin() + new_head_index);
-		m_snake_cells.push_back(head);
-		return MoveResponse::GROW;
+		// FIXME:	GROWING LOGIC AND MOVING THE SNAKE IS HANDLED
+		//			IN PLAYER::REDRAW();
+
+		// grow snek into free cell
+		if (false) {
+			// find apple
+			return MoveState::GROW;
+		} else {
+			return MoveState::MOVE;
+		}
 	}
+	// cell is not free, either;
+	// 1. it is out of bounds 
+	// 2. part of the snek
 	else {
-		bool touching = false;
-		for (auto& coord : m_snake_cells) {
-			if (coord.X == head.X && coord.Y == head.Y) {
-				touching = true;
-				break;
+		for (unsigned int i = 0; i < m_snake_cells.size() - 1; i++) {
+			if (m_snake_cells[i].X == head.X && m_snake_cells[i].Y == head.Y) {
+				return MoveState::TOUCH_SELF;
 			}
 		}
-		return MoveResponse::TOUCH;
 	}
-	return MoveResponse::OUT_OF_BOUNDS;
+	return MoveState::OUT_OF_BOUNDS;
 };
 
 std::vector<COORD> Snek::PlayArea::GetRandomFreePositions(unsigned short count) {

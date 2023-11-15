@@ -40,7 +40,7 @@ class SnekManager;
 		
 		//bool PlayerOutOfBounds(Player*);
 		//bool PlayerTouchesSelf(Player*);
-		void CheckCollisions();
+		bool CheckCollisions();
 
 		unsigned int m_score = 0;
 		unsigned short m_lives = 3;

@@ -1,6 +1,6 @@
 #include "Draw.h"
 
-SnekDraw::Draw::Draw(unsigned short width, unsigned short height) {
+SnekDraw::Draw::Draw(const unsigned short width, const unsigned short height) {
 	m_screen_colums = width;
 	m_screen_rows = height;
 };

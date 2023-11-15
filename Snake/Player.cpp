@@ -20,7 +20,7 @@ bool Snek::Player::IsAtPosition(COORD point) {
 	return false;
 }
 
-void Snek::Player::Redraw(bool grow) {
+void Snek::Player::Redraw(const bool grow) {
 	// undraw the tail
 	SnekDraw::Draw* draw = m_snek_manager->GetDraw();
 	draw->DrawCharacter(SnekDraw::GameCharacter::EMPTY, m_play_area->m_snake_cells.front());
@@ -47,6 +47,7 @@ void Snek::Player::Initialise(PlayArea* play_area, std::vector<COORD> snake, Hea
 	for (auto& cell : snake) {
 		m_play_area->m_snake_cells.push_back(cell);
 	}
+	
 	m_heading = Heading::Right;
 	DrawSelf();
 }

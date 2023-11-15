@@ -32,6 +32,6 @@ void Snek::UI::DrawGameUI(SnekDraw::Draw* draw, unsigned int score, unsigned sho
 	return;
 };
 
-void Snek::UI::UpdateGameUIScore(int score) {
+void Snek::UI::UpdateGameUIScore(const int score) {
 	return;
 };

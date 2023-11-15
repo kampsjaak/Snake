@@ -1,13 +1,13 @@
 #include <iostream>
 
 #include "Localisation.h"
-#include "lua.hpp"
+#include "lua\lua.hpp"
 
 Snek::Localisation::Localisation() {
 	ImportFromLUA();
 };
 
-std::string Snek::Localisation::GetString(LocalisedString localised_string) {
+std::string Snek::Localisation::GetString(const LocalisedString localised_string) {
 	return m_strings[static_cast<unsigned short>(localised_string)];
 };
 

@@ -33,9 +33,14 @@ int main(int argc, const char** argv)
 				game->Update();
 				std::this_thread::sleep_for(std::chrono::milliseconds(PROGRAM_UPDATE_STEP));
 				break;
-			case Snek::GameState::GAME_OVER:
+			case Snek::GameState::GAME_OVER_OUT_OF_BOUNDS:
 				system("cls");
-				std::cout << "sry bro snek ded";
+				std::cout << "snek hit the wall";
+				std::this_thread::sleep_for(std::chrono::milliseconds(PROGRAM_UPDATE_STEP));
+				break;
+			case Snek::GameState::GAME_OVER_TOUCH_SELF:
+				system("cls");
+				std::cout << "snek crazy";
 				std::this_thread::sleep_for(std::chrono::milliseconds(PROGRAM_UPDATE_STEP));
 				break;
 			case Snek::GameState::MENU:

@@ -68,37 +68,42 @@ void Snek::Game::Initialize(SnekManager* sm, Player* player) {
 	// initialise gameplay systems
 	m_snekManager->GetUI()->DrawGameUI(m_snekManager->GetDraw(), Game::GetScore(), Game::GetLives(), GetLocalisation());
 	m_player->Initialise(&m_play_area, { { 1,5 }, { 2,5 }, { 3,5 } }, Heading::Right);
-	// FIXME:	Add snek to play area
 	m_apples = m_play_area.GetRandomFreePositions(m_apple_spawn_count);
 	SpawnApple();
 }
 
-void Snek::Game::CheckCollisions() {
+// Move this to PlayArea class and check for apples during MoveStat checks
+bool Snek::Game::CheckCollisions() {
 	bool redraw = false;
 	for (auto& apple : m_apples) {
 		if (m_player->m_head.X == apple.X && m_player->m_head.Y == apple.Y) {
 			redraw = true;
-			m_player->Redraw(true);
 			// NOTE:	Fix specific apple respawning
 			//SpawnApple(); 
 		}
 	}
-	
-	m_player->Redraw(redraw);
+	return redraw;
 }
 
 void Snek::Game::Update() {
 	m_input_player.Update();
-	m_player->Move([this](COORD head, COORD tail) {
-		auto move_response = m_play_area.GrowSnek(head);
+	m_player->Move([&](COORD head, COORD tail) {
+		auto move_response = m_play_area.CheckCollisions(head, tail);
 		switch (move_response) {
-			case MoveResponse::OUT_OF_BOUNDS:
-			case MoveResponse::TOUCH:
-				m_game_state = GameState::GAME_OVER;
+			case MoveState::OUT_OF_BOUNDS:
+				m_game_state = GameState::GAME_OVER_OUT_OF_BOUNDS;
+				return;
+			case MoveState::TOUCH_SELF:
+				m_game_state = GameState::GAME_OVER_TOUCH_SELF;
+				return;
+			case MoveState::MOVE:
+				m_player->Redraw(false);
+				return;
+			case MoveState::GROW:
+				m_player->Redraw(true);
 				return;
 			default:
 				break;
 			}
 		});
-	CheckCollisions();
 }

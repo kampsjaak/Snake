@@ -20,13 +20,13 @@
 #define YELLOW			14
 #define WHITE			15
 
-SnekDraw::DrawConsole::DrawConsole(unsigned short width, unsigned short height) {
+SnekDraw::DrawConsole::DrawConsole(const unsigned short width, const unsigned short height) {
 	m_hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	m_screen_colums = width;
 	m_screen_rows = height;
 };
 
-void SnekDraw::DrawConsole::DrawCharacter(GameCharacter character, COORD position) {
+void SnekDraw::DrawConsole::DrawCharacter(const GameCharacter character, const COORD position) {
 	if (position.X < 0 || position.X > m_screen_colums) return;
 	if (position.Y < 0 || position.Y > m_screen_rows) return;
 
