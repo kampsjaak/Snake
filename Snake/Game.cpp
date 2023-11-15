@@ -60,10 +60,10 @@ void Snek::Game::Initialize(SnekManager* sm, Player* player) {
 	m_input_player = InputPlayer(m_player);
 	m_localisation = Localisation();
 	m_play_area = PlayArea(
-		m_snekManager->GetUI()->Height() - m_snekManager->GetUI()->m_hud_top_rows,
+		m_snekManager->GetUI()->m_hud_top_rows,
 		m_snekManager->GetUI()->m_border_column,
-		m_snekManager->GetUI()->m_hud_bottom_rows,
-		m_snekManager->GetUI()->Width() - (2 * m_snekManager->GetUI()->m_border_column));
+		m_snekManager->GetUI()->Height() - m_snekManager->GetUI()->m_hud_bottom_rows,
+		m_snekManager->GetUI()->Width() - m_snekManager->GetUI()->m_border_column);
 
 	// initialise gameplay systems
 	m_snekManager->GetUI()->DrawGameUI(m_snekManager->GetDraw(), Game::GetScore(), Game::GetLives(), GetLocalisation());

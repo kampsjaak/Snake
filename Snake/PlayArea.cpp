@@ -3,12 +3,12 @@
 #include <random>
 
 #include "PlayArea.h"
-#include "UI.h"
 
 Snek::PlayArea::PlayArea(unsigned short top, unsigned short left, unsigned short bottom, unsigned short right) {
-	m_max_y = top;
+	// NOTE:	absolute coordinates, portion of CLI::WIDTH and CLI::HEIGHT
+	m_min_y = top;
 	m_min_x = left;
-	m_min_y = bottom;
+	m_max_y = bottom;
 	m_max_x = right;
 
 	short rows = m_max_y - m_min_y;
@@ -17,8 +17,8 @@ Snek::PlayArea::PlayArea(unsigned short top, unsigned short left, unsigned short
 	m_free_cells.resize(vector_size);
 
 	for (auto i = 0; i < vector_size; i++) {
-		m_free_cells[i].X = m_min_x + i % columns + UI::m_border_column;
-		m_free_cells[i].Y = m_min_y + floor(i / columns) + UI::m_hud_top_rows;
+		m_free_cells[i].X = m_min_x + i % columns;
+		m_free_cells[i].Y = m_min_y + floor(i / columns);
 	}
 };
 
@@ -56,10 +56,6 @@ Snek::MoveState Snek::PlayArea::CheckCollisions(const COORD head, const COORD ta
 	}
 		
 	if (new_head_index > -1) {
-		// FIXME:	GROWING LOGIC AND MOVING THE SNAKE IS HANDLED
-		//			IN PLAYER::REDRAW();
-
-		// grow snek into free cell
 		if (false) {
 			// find apple
 			return MoveState::GROW;
