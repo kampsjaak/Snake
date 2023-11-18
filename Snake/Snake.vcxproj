@@ -148,6 +148,8 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="InputPlayer.cpp" />
     <ClCompile Include="PlayArea.cpp" />
+    <ClCompile Include="Coord.cpp" />
+    <ClCompile Include="Coord.h" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="Localisation.cpp" />
     <ClCompile Include="lua\lapi.c" />

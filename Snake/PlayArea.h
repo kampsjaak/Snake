@@ -3,8 +3,8 @@
 #include <vector>
 
 namespace Snek {
-enum class MoveState : unsigned short {
-	MOVE,
+enum class Collision : unsigned short {
+	NONE,
 	GROW,
 	OUT_OF_BOUNDS,
 	TOUCH_SELF
@@ -15,10 +15,10 @@ public:
 	PlayArea() {};
 	PlayArea(unsigned short, unsigned short, unsigned short, unsigned short);
 
-	void MoveSnek(COORD, COORD);
-	MoveState CheckCollisions(COORD, COORD);
+	void MoveSnek(const COORD);
+	Collision CheckCollisions(COORD);
 	std::vector<COORD> GetRandomFreePositions(unsigned short);
-	//bool COORD IsCoordinateInBounds(COORD);
+	std::vector<COORD> GetRandomFreePositions(unsigned short, std::vector<COORD>);
 	std::vector<COORD> m_snake_cells;
 	std::vector<COORD> m_free_cells;
 private:

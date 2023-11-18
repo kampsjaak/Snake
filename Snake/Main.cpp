@@ -12,8 +12,8 @@ const unsigned int PROGRAM_UPDATE_STEP = 175; //ms
 
 Snek::Player player;
 
-unsigned short Snek::CLI::WIDTH = 20;
-unsigned short Snek::CLI::HEIGHT = 10;
+unsigned short Snek::CLI::WIDTH = 12;
+unsigned short Snek::CLI::HEIGHT = 6;
 unsigned short Snek::CLI::LANGUAGE = 0;
 
 int main(int argc, const char** argv)

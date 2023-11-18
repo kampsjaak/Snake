@@ -14,7 +14,7 @@ enum class LocalisedString : unsigned short {
 class Localisation {
 public:
 	Localisation();
-	std::string GetString(LocalisedString);
+	std::string GetString(const LocalisedString);
 	void ImportFromLUA();
 private:
 	std::string m_strings[static_cast<unsigned short>(LocalisedString::ENUM_LENGTH)];

@@ -13,33 +13,21 @@ void Snek::Player::DrawSelf() {
 	}
 }
 
-bool Snek::Player::IsAtPosition(COORD point) {
+bool Snek::Player::IsAtPosition(const COORD point) {
 	for (auto& coord : m_play_area->m_snake_cells) {
 		if (coord.X == point.X && coord.Y == point.Y) return true;
 	}
 	return false;
 }
 
-void Snek::Player::Redraw(const bool grow) {
-	// undraw the tail
+void Snek::Player::RedrawSelf(const COORD old_tail, bool grow_snek) {
 	SnekDraw::Draw* draw = m_snek_manager->GetDraw();
-	draw->DrawCharacter(SnekDraw::GameCharacter::EMPTY, m_play_area->m_snake_cells.front());
-
-	// snek eat apple
-	if(grow) {
-		m_play_area->m_snake_cells.push_back(m_head);
-	} else {
-		// shift array over 1 overwriting the tail
-		for (size_t i = 0; i < m_play_area->m_snake_cells.size() - 1; i++) {
-			m_play_area->m_snake_cells[i].X = m_play_area->m_snake_cells[i + 1].X;
-			m_play_area->m_snake_cells[i].Y = m_play_area->m_snake_cells[i + 1].Y;
-		}
-		// add head position
-		m_play_area->m_snake_cells.back() = m_head;
+	
+	draw->DrawCharacter(SnekDraw::GameCharacter::SNAKE, m_play_area->m_snake_cells.back());
+	if (!grow_snek) {
+		draw->DrawCharacter(SnekDraw::GameCharacter::EMPTY, old_tail);
 	}
 
-	draw->DrawCharacter(SnekDraw::GameCharacter::SNAKE, m_play_area->m_snake_cells.back());
-	return;
 };
 
 void Snek::Player::Initialise(PlayArea* play_area, std::vector<COORD> snake, Heading h) {
@@ -52,9 +40,7 @@ void Snek::Player::Initialise(PlayArea* play_area, std::vector<COORD> snake, Hea
 	DrawSelf();
 }
 
-void Snek::Player::Move(std::function<void(COORD, COORD)> Callback) {
-	COORD tail = m_play_area->m_snake_cells[0];
-
+void Snek::Player::MoveHead(std::function<void(COORD, COORD)> Callback) {
 	m_previous_heading = m_heading;
 	switch (m_heading) {
 	case Heading::Left:
@@ -74,7 +60,7 @@ void Snek::Player::Move(std::function<void(COORD, COORD)> Callback) {
 		m_head.Y = m_play_area->m_snake_cells.back().Y + 1;
 		break;
 	}
-	Callback(m_play_area->m_snake_cells.back(), tail);
+	Callback(m_head, m_play_area->m_snake_cells[0]);
 }
 
 void Snek::Player::SetSnekManager(SnekManager* snek_manager) {

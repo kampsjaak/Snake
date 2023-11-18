@@ -27,10 +27,10 @@ public:
 	void SetSnekManager(SnekManager*);
 
 	void Initialise(PlayArea*, std::vector<COORD>, Heading);
-	void Move(std::function<void(COORD, COORD)>);
+	void MoveHead(std::function<void(COORD, COORD)>);
 	void DrawSelf();
-	void Redraw(bool);
-	bool IsAtPosition(COORD);
+	void RedrawSelf(const COORD, bool);
+	bool IsAtPosition(const COORD);
 	
 	Heading m_heading = Heading::Right;
 	Heading m_previous_heading = Heading::Right;

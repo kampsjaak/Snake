@@ -18,11 +18,11 @@ Snek::PlayArea::PlayArea(unsigned short top, unsigned short left, unsigned short
 
 	for (auto i = 0; i < vector_size; i++) {
 		m_free_cells[i].X = m_min_x + i % columns;
-		m_free_cells[i].Y = m_min_y + floor(i / columns);
+		m_free_cells[i].Y = m_min_y + static_cast<short>(floor(i / columns));
 	}
 };
 
-void Snek::PlayArea::MoveSnek(COORD head, COORD tail) {
+void Snek::PlayArea::MoveSnek(const COORD head) {
 	short new_head_index = -1;
 	for (short i = 0; i < m_free_cells.size(); i++) {
 		if(m_free_cells[i].X == head.X && m_free_cells[i].Y == head.Y) {
@@ -30,59 +30,46 @@ void Snek::PlayArea::MoveSnek(COORD head, COORD tail) {
 			break;
 		}
 	}
-	// FIXME:	if new_head_index evaluates as -1 or vector.size() == 0,
-	//			we have won or touched ourselves.
-	m_free_cells[new_head_index] = tail;
+	if (new_head_index < 0) return;
 
-	new_head_index = -1;
-	for (short i = 0; i < m_snake_cells.size(); i++) {
-		if (m_snake_cells[i].X == tail.X && m_snake_cells[i].Y == tail.Y) {
-			new_head_index = i;
-			break;
-		}
-	}
-	m_snake_cells[new_head_index] = head;
+	m_free_cells.push_back(m_snake_cells[0]);	
+	m_snake_cells.erase(m_snake_cells.begin());	
+	m_snake_cells.push_back(m_free_cells[new_head_index]);
+	m_free_cells.erase(m_free_cells.begin() + new_head_index);
 };
 
-Snek::MoveState Snek::PlayArea::CheckCollisions(const COORD head, const COORD tail) {
+Snek::Collision Snek::PlayArea::CheckCollisions(const COORD new_head) {
 	short new_head_index = -1;
 
-	// is new head a freecell?
+	// is new head a free cell?
 	for (auto i = 0; i < m_free_cells.size(); i++) {
-		if (m_free_cells[i].X == head.X && m_free_cells[i].Y == head.Y) {
+		if (m_free_cells[i].X == new_head.X && m_free_cells[i].Y == new_head.Y) {
 			new_head_index = i;
 			break;
 		}
 	}
 		
-	if (new_head_index > -1) {
-		if (false) {
-			// find apple
-			return MoveState::GROW;
-		} else {
-			return MoveState::MOVE;
-		}
-	}
-	// cell is not free, either;
-	// 1. it is out of bounds 
-	// 2. part of the snek
-	else {
+	if (new_head_index < 0) {
 		for (unsigned int i = 0; i < m_snake_cells.size() - 1; i++) {
-			if (m_snake_cells[i].X == head.X && m_snake_cells[i].Y == head.Y) {
-				return MoveState::TOUCH_SELF;
+			if (m_snake_cells[i].X == new_head.X && m_snake_cells[i].Y == new_head.Y) {
+				return Collision::TOUCH_SELF;
 			}
 		}
+		return Collision::OUT_OF_BOUNDS;
+	} else {
+		if (false) {
+			return Collision::GROW;
+		}
+		
+		return Collision::NONE;
 	}
-	return MoveState::OUT_OF_BOUNDS;
 };
 
 std::vector<COORD> Snek::PlayArea::GetRandomFreePositions(unsigned short count) {
 	auto size = m_free_cells.size();
 	count < size ? true : count = size;
 	
-	std::vector<COORD> out_vector;
-	// FIXME:	I'm sure I can do this in the constructor
-	out_vector.resize(count);
+	std::vector<COORD> out_vector(count);
 
 	auto seed = std::chrono::system_clock::now().time_since_epoch().count();
 	std::vector<COORD> copy_vector = m_free_cells;
