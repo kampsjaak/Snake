@@ -8,47 +8,34 @@
 #include "Draw.h"
 #include "Player.h"
 
-COORD Snek::Game::RandomPosition() {
-	auto rng = static_cast<short>(rand());
-	return { static_cast<short>(rng % m_snekManager->GetUI()->Width()),
-		static_cast<short>(rng % m_snekManager->GetUI()->Height())
-		};
+int Snek::Game::SetAppleCount() {
+	// TODO:	Determine the number of apples here dynamically
+	int count = 3;
+	m_play_area.m_apple_cells.resize(count);
+	return count;
 }
 
-void Snek::Game::SpawnApple(COORD* apple, COORD pos) {
-	apple->X = pos.X;
-	apple->Y = pos.Y;
-	m_snekManager->GetDraw()->DrawCharacter(SnekDraw::GameCharacter::APPLE, *apple);
-	return;
-}
-
-void Snek::Game::SpawnApple() {
-	// FIXME:	Do something more intelligent
-	//			Should there be a world and apple manager?
-	SpawnApple(&m_apples[0], RandomPosition());
-}
-
-void Snek::Game::SpawnApples() {
-	for(auto i = 0; i < m_apple_spawn_count; i++) {
-		m_snekManager->GetDraw()->DrawCharacter(SnekDraw::GameCharacter::APPLE, m_apples[i]);
+void Snek::Game::RespawnApple(const COORD old_apple) {
+	for (COORD& cell : m_play_area.m_apple_cells) {
+		if (cell.X == old_apple.X && cell.Y == old_apple.Y) {
+			std::vector<COORD> new_apple = m_play_area.GetRandomFreePositions(1, &old_apple);
+			cell.X = new_apple[0].X;
+			cell.Y = new_apple[0].Y;
+			m_snekManager->GetDraw()->DrawCharacter(SnekDraw::GameCharacter::APPLE, cell);
+			break;
+		}
 	}
 }
 
-//bool Snek::Game::PlayerOutOfBounds(Player* player) {
-//	COORD* head = &player->m_snake.back();
-//	if (	head->X < 0
-//		||	head->Y < m_snekManager->GetUI()->m_hud_bottom_rows
-//		||	head->X > m_snekManager->GetUI()->Width()
-//		||	head->Y > m_snekManager->GetUI()->Height()) {
-//		return true;
-//	}
-//	return false;
-//}
-//
-//bool Snek::Game::PlayerTouchesSelf(Player* player) {
-//	if (player->IsAtPosition(player->m_snake.back())) return true;
-//	return false;
-//};
+void Snek::Game::InitializeApples() {
+	int count = SetAppleCount();
+	std::vector<COORD> apples = m_play_area.GetRandomFreePositions(count, nullptr);
+	m_play_area.m_apple_cells = apples;
+
+;	for(auto i = 0; i < m_play_area.m_apple_cells.size(); i++) {
+		m_snekManager->GetDraw()->DrawCharacter(SnekDraw::GameCharacter::APPLE, m_play_area.m_apple_cells[i]);
+	}
+}
 
 void Snek::Game::Initialize(SnekManager* sm, Player* player) {
 	// initialise dependencies
@@ -68,21 +55,7 @@ void Snek::Game::Initialize(SnekManager* sm, Player* player) {
 	// initialise gameplay systems
 	m_snekManager->GetUI()->DrawGameUI(m_snekManager->GetDraw(), Game::GetScore(), Game::GetLives(), GetLocalisation());
 	m_player->Initialise(&m_play_area, { { 1,2 }, { 2,2 }, { 3,2 } }, Heading::Right);
-	m_apples = m_play_area.GetRandomFreePositions(m_apple_spawn_count);
-	SpawnApple();
-}
-
-// Move this to PlayArea class and check for apples during MoveStat checks
-bool Snek::Game::CheckCollisions() {
-	bool redraw = false;
-	for (auto& apple : m_apples) {
-		if (m_player->m_head.X == apple.X && m_player->m_head.Y == apple.Y) {
-			redraw = true;
-			// NOTE:	Fix specific apple respawning
-			//SpawnApple(); 
-		}
-	}
-	return redraw;
+	InitializeApples();
 }
 
 void Snek::Game::Update() {
@@ -99,10 +72,12 @@ void Snek::Game::Update() {
 				return;
 			case Collision::NONE:
 				m_play_area.MoveSnek(new_head);
-				m_player->RedrawSelf(old_tail, false);
+				m_player->RedrawSelf(false, &old_tail);
 				return;
 			case Collision::GROW:
-				m_player->RedrawSelf(old_tail, true);
+				m_play_area.MoveSnek(new_head);
+				RespawnApple(new_head);
+				m_player->RedrawSelf(true, nullptr);
 				return;
 			default:
 				break;

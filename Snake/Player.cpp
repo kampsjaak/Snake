@@ -20,12 +20,12 @@ bool Snek::Player::IsAtPosition(const COORD point) {
 	return false;
 }
 
-void Snek::Player::RedrawSelf(const COORD old_tail, bool grow_snek) {
+void Snek::Player::RedrawSelf(bool grow_snek, const COORD* old_tail) {
 	SnekDraw::Draw* draw = m_snek_manager->GetDraw();
 	
 	draw->DrawCharacter(SnekDraw::GameCharacter::SNAKE, m_play_area->m_snake_cells.back());
 	if (!grow_snek) {
-		draw->DrawCharacter(SnekDraw::GameCharacter::EMPTY, old_tail);
+		draw->DrawCharacter(SnekDraw::GameCharacter::EMPTY, *old_tail);
 	}
 
 };

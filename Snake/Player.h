@@ -29,14 +29,13 @@ public:
 	void Initialise(PlayArea*, std::vector<COORD>, Heading);
 	void MoveHead(std::function<void(COORD, COORD)>);
 	void DrawSelf();
-	void RedrawSelf(const COORD, bool);
+	void RedrawSelf(bool, const COORD*);
 	bool IsAtPosition(const COORD);
 	
 	Heading m_heading = Heading::Right;
 	Heading m_previous_heading = Heading::Right;
 	
 	COORD m_head = { -1,-1 };
-	//std::vector<COORD> m_snake;
 private:
 	SnekManager* m_snek_manager = {};
 	PlayArea* m_play_area = {};

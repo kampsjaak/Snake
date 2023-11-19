@@ -15,11 +15,14 @@ Snek::PlayArea::PlayArea(unsigned short top, unsigned short left, unsigned short
 	short columns = m_max_x - m_min_x;
 	short vector_size = rows * columns;
 	m_free_cells.resize(vector_size);
+	m_free_cells.reserve(vector_size);
 
 	for (auto i = 0; i < vector_size; i++) {
 		m_free_cells[i].X = m_min_x + i % columns;
 		m_free_cells[i].Y = m_min_y + static_cast<short>(floor(i / columns));
 	}
+
+	m_snake_cells.reserve(vector_size);
 };
 
 void Snek::PlayArea::MoveSnek(const COORD head) {
@@ -37,6 +40,19 @@ void Snek::PlayArea::MoveSnek(const COORD head) {
 	m_snake_cells.push_back(m_free_cells[new_head_index]);
 	m_free_cells.erase(m_free_cells.begin() + new_head_index);
 };
+
+bool Snek::PlayArea::IsAppleCell(const COORD new_head) {
+	if (m_apple_cells.size() == 0) {
+		return false;
+	}
+
+	for (COORD& cell: m_apple_cells) {
+		if (cell.X == new_head.X && cell.Y == new_head.Y) {
+			return true;
+		}
+	}
+	return false;
+}
 
 Snek::Collision Snek::PlayArea::CheckCollisions(const COORD new_head) {
 	short new_head_index = -1;
@@ -57,27 +73,38 @@ Snek::Collision Snek::PlayArea::CheckCollisions(const COORD new_head) {
 		}
 		return Collision::OUT_OF_BOUNDS;
 	} else {
-		if (false) {
+		if (IsAppleCell(new_head)) {
 			return Collision::GROW;
 		}
-		
 		return Collision::NONE;
 	}
 };
 
-std::vector<COORD> Snek::PlayArea::GetRandomFreePositions(unsigned short count) {
-	auto size = m_free_cells.size();
-	count < size ? true : count = size;
-	
-	std::vector<COORD> out_vector(count);
+std::vector<COORD> Snek::PlayArea::GetRandomFreePositions(unsigned short requested_number_of_positions, const COORD* excluded_position) {
+	auto number_of_free_cells = m_free_cells.size();
+	requested_number_of_positions < number_of_free_cells ? true : requested_number_of_positions = number_of_free_cells;
+
+	std::vector<COORD> random_positions(requested_number_of_positions);
 
 	auto seed = std::chrono::system_clock::now().time_since_epoch().count();
-	std::vector<COORD> copy_vector = m_free_cells;
-	std::shuffle(std::begin(copy_vector), std::end(copy_vector), std::default_random_engine(seed));
+	std::vector<COORD> shuffled_free_cells = m_free_cells;
+	std::shuffle(std::begin(shuffled_free_cells), std::end(shuffled_free_cells), std::default_random_engine(seed));
 	
-	for (auto i = 0; i < count; i++) {
-		out_vector[i] = copy_vector[i];
+	// the case that we have > 1 apple positions
+	// we want to keep the existing positions but reroll the cooordinate at positional argument
+	// while also excluding it as a potential new apple spot 
+	if (excluded_position != nullptr) {
+		for (auto i = shuffled_free_cells.size() - 1; i >= 0; i--) {
+			if (shuffled_free_cells[i].X == excluded_position->X && shuffled_free_cells[i].Y == excluded_position->Y) {
+				shuffled_free_cells.erase(shuffled_free_cells.begin() + i);
+				break;
+			}
+		}
 	}
 
-	return out_vector;
+	for (auto i = 0; i < requested_number_of_positions; i++) {
+		random_positions[i] = shuffled_free_cells[i];
+	}
+
+	return random_positions;
 };

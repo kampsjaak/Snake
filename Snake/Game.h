@@ -18,10 +18,7 @@ class SnekManager;
 
 		void Initialize(SnekManager*, Player*);
 		void Update();
-		void SpawnApple();
-		void SpawnApple(COORD*, COORD);
-		void SpawnApples();
-		COORD RandomPosition();
+		void InitializeApples();
 
 		PlayArea* GetPlayArea() { return &m_play_area; };
 		Localisation* GetLocalisation() { return &m_localisation; };
@@ -30,7 +27,6 @@ class SnekManager;
 
 		PlayArea m_play_area;
 		GameState m_game_state = GameState::RUNNING;
-		std::vector<COORD> m_apples;
 
 		SnekManager* m_snekManager{};
 		Player* m_player{};
@@ -38,13 +34,10 @@ class SnekManager;
 		Localisation m_localisation;
 		InputPlayer m_input_player;
 		
-		//bool PlayerOutOfBounds(Player*);
-		//bool PlayerTouchesSelf(Player*);
-		bool CheckCollisions();
+		int SetAppleCount();
+		void RespawnApple(const COORD);
 
 		unsigned int m_score = 0;
 		unsigned short m_lives = 3;
-		unsigned short m_apple_spawn_count = 3;
-
 	};
 }
