@@ -1,8 +1,7 @@
 #pragma once
-#include <windows.h>
 #include <vector>
 
-
+#include "Coord.h"
 #include "Player.h"
 #include "Enums.h"
 #include "Localisation.h"
@@ -35,7 +34,7 @@ class SnekManager;
 		InputPlayer m_input_player;
 		
 		int SetAppleCount();
-		void RespawnApple(const COORD);
+		void RespawnApple(const Snek::Coord);
 
 		unsigned int m_score = 0;
 		unsigned short m_lives = 3;

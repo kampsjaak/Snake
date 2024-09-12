@@ -1,5 +1,5 @@
 #pragma once
-#include <windows.h>
+#include "Coord.h"
 #include <stdint.h>
 
 namespace SnekDraw {
@@ -21,7 +21,7 @@ public:
 	unsigned const short m_hud_bottom_rows = 2;
 	unsigned const short m_border_columns = 2;
 	
-	virtual void DrawCharacter(GameCharacter, COORD);
+	virtual void DrawCharacter(GameCharacter, Snek::Coord);
 private:
 	unsigned char m_print_char = ' ';
 	unsigned short m_screen_colums = 0;

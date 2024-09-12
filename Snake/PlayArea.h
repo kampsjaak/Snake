@@ -1,6 +1,7 @@
 #pragma once
-#include <windows.h>
 #include <vector>
+
+#include "Coord.h"
 
 namespace Snek {
 enum class Collision : unsigned short {
@@ -15,13 +16,13 @@ public:
 	PlayArea() {};
 	PlayArea(unsigned short, unsigned short, unsigned short, unsigned short);
 
-	void MoveSnek(const COORD);
-	Collision CheckCollisions(COORD);
-	bool IsAppleCell(const COORD);
-	std::vector<COORD> GetRandomFreePositions(unsigned short, const COORD*);
-	std::vector<COORD> m_snake_cells;
-	std::vector<COORD> m_free_cells;
-	std::vector<COORD> m_apple_cells = {};
+	void MoveSnek(const Snek::Coord);
+	Collision CheckCollisions(Snek::Coord);
+	bool IsAppleCell(const Snek::Coord);
+	std::vector<Snek::Coord> GetRandomFreePositions(unsigned short, const Snek::Coord*);
+	std::vector<Snek::Coord> m_snake_cells;
+	std::vector<Snek::Coord> m_free_cells;
+	std::vector<Snek::Coord> m_apple_cells = {};
 private:
 	unsigned short m_max_y = 0;
 	unsigned short m_min_x = 0;

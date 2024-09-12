@@ -1,8 +1,9 @@
 #pragma once
-#include <windows.h>
 #include <vector>
 #include <string>
 #include <functional>
+
+#include "Coord.h"
 
 namespace Snek {
 	class SnekManager;
@@ -26,16 +27,16 @@ public:
 
 	void SetSnekManager(SnekManager*);
 
-	void Initialise(PlayArea*, std::vector<COORD>, Heading);
-	void MoveHead(std::function<void(COORD, COORD)>);
+	void Initialise(PlayArea*, std::vector<Snek::Coord>, Heading);
+	void MoveHead(std::function<void(Snek::Coord, Snek::Coord)>);
 	void DrawSelf();
-	void RedrawSelf(bool, const COORD*);
-	bool IsAtPosition(const COORD);
+	void RedrawSelf(bool, const Snek::Coord*);
+	bool IsAtPosition(const Snek::Coord);
 	
 	Heading m_heading = Heading::Right;
 	Heading m_previous_heading = Heading::Right;
 	
-	COORD m_head = { -1,-1 };
+	Snek::Coord m_head = { -1,-1 };
 private:
 	SnekManager* m_snek_manager = {};
 	PlayArea* m_play_area = {};
